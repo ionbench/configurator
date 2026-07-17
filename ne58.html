@@ -1,0 +1,415 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<style>
+        @font-face {
+            font-family: Reyhan-Regular;
+            src: url('Reyhan-Regular.ttf') format('truetype');
+        }
+		@font-face {
+            font-family: Reyhan-Medium;
+            src: url('Reyhan-Medium.ttf') format('truetype');
+        }
+        legend {
+            font-family: Reyhan-Medium, Arial, sans-serif;
+        }
+        label {
+            font-family: Reyhan-Regular, Arial, sans-serif;
+        }
+        h2 {
+            font-family: Reyhan-Regular, Arial, sans-serif;
+        }
+    </style>	
+	<title>MS Bench Configurator</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="./styles.css">	
+	<link rel="icon" type="image/png" href="favicon.png" />
+</head>
+
+
+<body>
+	<div class="app">
+		<div class="frame_config">
+		<iframe  id="api-frame" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+		</div>
+		<br>
+		<div class="options">
+			<div class="categories">
+				<legend>Dimensions Setting</legend>
+				<hr>
+				<div class="slidecontainer" style="width: 300%;">
+					<label class="form-label">Adjust Width :</label>
+					<br>
+					<input class="form-range" autocomplete="off" min="1" max="12" value="11" id="dim_id" type="range" list="tickmarks">
+					<datalist id="tickmarks">
+					<option name="90" value="1" inch="35.4" label="min"></option>
+					<option name="100" value="2" inch="39.4"></option>
+					<option name="110" value="3" inch="39.4"></option>
+					<option name="120" value="4" inch="42.2"></option>
+					<option name="130" value="5" inch="51.2"></option>
+					<option name="140" value="6" inch="55.1"></option>
+					<option name="150" value="7" inch="59"></option>
+					<option name="160" value="8" inch="63"></option>
+					<option name="170" value="9" inch="66.9"></option>
+					<option name="180" value="10" inch="70.9"></option>
+					<option name="190" value="11" inch="74.8"></option>
+					<option name="200" value="12" inch="78.7" label="max"></option>
+					</datalist>						
+					<label id="allCm">
+						<input autocomplete="off" type="text" value="190" hidden id="dim_val">
+					</label>
+					<label id="allIn">
+						<input autocomplete="off" type="text" value="74.8" hidden id="dimInch_val">
+					</label>					
+				</div>
+				<div>
+					<label class="labelDim" for="dimWS_for">Bench dimensions : </label>
+				</div>
+				<div class="dimSelector">
+					<label class="textSelector" id="dimCm_WS">
+							<input autocomplete="off" type="text" class="textSelector" value="" disabled id="dimCm_WS_id"> 
+					</label>
+					<label class="textSelector" id="dimIn_WS">
+							<input autocomplete="off" type="text" class="textSelector" value="" disabled id="dimIn_WS_id">
+					</label>
+					<span>cm</span>
+					<label>
+						<label class="switch">
+							<input autocomplete="off" type="checkbox" id="togBtn">
+							<div class="slider round" id="dimUnite">
+								<span class="on">in</span>
+								<span class="off">cm</span>
+							</div>
+						</label>
+					</label>
+					<span>in</span>
+				</div>
+				<div>
+					<label class="labelDim" for="dimWS_for">Bench reference : </label>	
+					<div class="dimSelector">			
+					<label id="Model_BCH">
+							<input autocomplete="off" class="textSelector" type="text" value="" disabled id="Model_BCH_id">
+					</label>
+					</div>
+				</div>
+				<!-- <br> -->
+				<div class="form-selection">
+					<select hidden class="selectIon" autocomplete="off" id="ne_id">
+					  <option hidden>NE00</option>
+					  <option>NE27</option>
+					  <option selected>NE58</option>
+					  <option>NE78</option>
+					</select> 
+				</div>
+				<br>
+					<div class="form-check" id="encleft_id">
+						<label class="form-check-label" for="encleft_b">
+						<input class="form-check-input" type="checkbox" autocomplete="off" id="encleft_b"><span>ENC_LEFT</span> - <span> Noise enclosure on the left.</span></label>
+					</div>
+			</div>	
+			<br>	
+			<div class="categories">
+					<legend>Workstation</legend>
+				<hr>
+					<div class="form-check" id="dr3_id">
+						<label class="form-check-label" for="dr3_b">
+						<input class="form-check-input" type="checkbox" autocomplete="off" id="dr3_b"><span>DR3</span> - <span> Bank of three drawers.</span></label>
+					</div>
+					<div class="form-check" id="slidews_id">
+						<label class="form-check-label" for="slidews_b">
+						<input class="form-check-input" type="checkbox" autocomplete="off" id="slidews_b"><span>SLIDE_WS</span> - <span> Extra sliding worksurface underneath countertop.</span></label>
+					</div>	
+					<div class="form-check" id="latd_id">
+						<label class="form-check-label" for="latd_b">
+						<input class="form-check-input" type="checkbox" autocomplete="off" id="latd_b"><span>LATD</span> - <span> Additional work surface on one side of the bench.</span></label>
+						<div>
+						<input autocomplete="off" disabled type="button" id="latdL_b" value="LEFT">
+						<input autocomplete="off" disabled type="button" id="latdR_b" value="RIGHT">
+						</div>
+					</div>
+			</div>
+			<br>
+			<div class="categories">
+				<legend>Informatics</legend>
+				<hr>
+				<div class="form-check" id="pc1_id">
+					<label class="form-check-label" for="pc1_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="pc1_b"><span>PC1</span> - <span> CPU holder.</span></label>
+				</div>	
+				<div class="form-check" id="arm1_id">
+					<label class="form-check-label" for="arm1_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="arm1_b"><span>ARM1</span> - <span> Pack of a single monitor arm and keyboard on sliding platform.</span></label>
+				</div>	
+				<div class="form-check" id="scr1_id">
+					<label class="form-check-label" for="scr1_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="scr1_b"><span>SCR1</span> - <span> Monitor arm.</span></label>
+				</div>	
+				<div class="form-check" id="key1_id">
+					<label class="form-check-label" for="key1_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="key1_b"><span>KEY1</span> - <span> Keyboard on sliding platform.</span></label>
+				</div>	
+				<div class="form-check" id="armerg_id">
+					<label class="form-check-label" for="armerg_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="armerg_b"><span>ARM_ERG</span> - <span> Monitor arm with integrated keyboard shelf.</span></label>
+				</div>		
+				<div class="form-check">
+						<label class="form-check-label" for="elec_b">
+						<input class="form-check-input" autocomplete="off" type="checkbox" id="elec_b"><span>ELEC</span> - <span> Power strip.</span></label>
+					</div>
+				<div class="form-selection">
+					<select class="selectIon" autocomplete="off" id="elec_id">
+						  <option selected>EU</option>
+						  <option>US</option>
+						  <option>DE</option>
+						  <option>UK</option>
+						  <option>CH</option>
+					</select> 
+				</div>
+				<div class="form-check" id="cabletray_id">
+					<label class="form-check-label" for="cabletray_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="cabletray_b"><span>CABLE_TRAY</span> - <span> Cable management system.</span></label>
+				</div>
+			</div>
+			<br>
+			<div class="categories">
+				<legend>Overheating security</legend>
+				<hr>
+				<div class="form-check" id="opeSafe_id">
+					<label class="form-check-label" for="opeSafe_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="opeSafe_b"><span>DOOR-OPE-SAFETY</span> - <span> Automatic door opening safety system.</label>
+				</div>
+			</div>	
+			<br>
+			<div class="categories">
+				<legend>Solvent management</legend>
+				<hr>
+				<div class="form-check" id="solv_id">
+					<label class="form-check-label" for="solv_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="solv_b"><span>SOLV</span> - <span> Container for solvent waste bottles.</span></label>
+					<div class="form-check" id="can10l_id">
+						<label class="form-check-label" for="can10l_b">
+						<input class="form-check-input" type="checkbox" autocomplete="off" id="can10l_b"><span>CAN10L</span> - <span> Solvent waste canister 2.6 US gal. (10L) with safety cap.</span></label>
+						<div class="form-check" id="eleclevel_id">
+							<label class="form-check-label" for="eleclevel_b">
+							<input class="form-check-input" type="checkbox" autocomplete="off" id="eleclevel_b"><span>ELEC_LEVEL</span> - <span> Solvent waste level detector with electronic module Alarm sound when canister is full.</span></label>
+						<br class="form-check" id="exhfil_id">
+							<label class="form-check-label" for="exhfil_b">
+							<input class="form-check-input" type="checkbox" autocomplete="off" id="exhfil_b"><span>EXH_FIL</span> - <span> Exhaut filter for CAN-10L canister.</span></label>
+						</div>
+					</div>
+				</div>
+				<div class="form-check" id="latsolv_id">
+					<label class="form-check-label" for="latsolv_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="latsolv_b"><span>LATSOLV</span> - <span> Container for solvent waste bottles.</span></label>
+					<div class="form-check" id="latcan10l_id" disabled>
+						<label class="form-check-label" for="latcan10l_b">
+						<input class="form-check-input" type="checkbox" autocomplete="off" id="latcan10l_b"><span>CAN10L</span> - <span> Solvent waste canister 2.6 US gal. (10L) with safety cap.</span></label>
+						<div class="form-check" id="lateleclevel_id">
+							<label class="form-check-label" for="lateleclevel_b">
+							<input class="form-check-input" type="checkbox" autocomplete="off" id="lateleclevel_b"><span>ELEC_LEVEL</span> - <span> Solvent waste level detector with electronic module Alarm sound when canister is full.</span></label>
+						<br class="form-check" id="latexhfil_id">
+							<label class="form-check-label" for="latexhfil_b">
+							<input class="form-check-input" type="checkbox" autocomplete="off" id="latexhfil_b"><span>EXH_FIL</span> - <span> Exhaut filter for CAN-10L canister.</span></label>
+						</div>
+					</div>
+				</div>
+				<div class="form-check" id="mnfld_id">
+					<label class="form-check-label" for="mnfld_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="mnfld_b"><span>SOLV-MNFLD <b style="color:#FF0000">NEW!!</b></span> </span> - <span> Magnetic manifold to collect solvent waste tubing.</span></label>
+				</div>
+			</div>
+			<br>
+			<div class="categories">
+				<legend>Energy saving</legend>
+				<hr>
+				<div class="form-check" id="hrm_id">
+					<label class="form-check-label" for="hrm_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="hrm_b"><span>HRM</span> - <span> Noise enclosure hot air collector system, connected to the room ventilation exhaust.</span></label>
+					<div>Exhaust
+						<input autocomplete="off" disabled type="button" id="bouchUp_b" value="VERTICAL">
+						<input autocomplete="off" disabled type="button" id="bouchSide_b" value="HORIZONTAL">
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="categories">
+				<legend>Maintenance</legend>
+				<hr>
+				<div class="form-check" id="vpsp_id">
+					<label class="form-check-label" for="vpsp_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="vpsp_b"><span>VPSP</span> - <span> Stainless steel drip pan for vacuum pump.</span></label>
+				</div>
+				<div class="form-check" id="odp_id">
+					<label class="form-check-label" for="odp_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="odp_b"><span>ODP</span> - <span> Oil pump to drain the vacuum pump.</span></label>
+				</div>
+				<div class="form-check" id="odk_id">
+					<label class="form-check-label" for="odk_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="odk_b"><span>ODK</span> - <span> Facilitate oil draining, one kit per vacuum pump.</span></label>
+				</div>
+				<div class="form-check" id="slidepump_id">
+					<label class="form-check-label" for="slidepump_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="slidepump_b"><span>SLIDE_PUMP</span> - <span> Sliding platform for vacuum pump.</span></label>
+				</div>
+			</div>
+			<br>
+			<div class="categories">
+				<legend>Color</legend>
+				<hr>
+				<div id="color_id">
+					<div class="form-check" id="grey_id">
+						<label class="form-check-label" for="grey_b">
+						<input class="form-check-input" type="checkbox" autocomplete="off" id="grey_b"><span>GREY_CO_MS</span> - <span> Bench color : Light Grey.</span></label>
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="categories">
+				<legend>Controls</legend>
+				<hr>
+				<div class="form-check" id="opendoor_id">
+					<label class="form-check-label" for="opendoor_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="opendoor_b">OPEN DOOR</label>
+				</div>
+				<div class="form-check" id="pump_id">
+					<label class="form-check-label" for="pump_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="pump_b">SHOW PUMP</label>
+				</div>
+				<div class="form-check" id="slidingAll_id">
+					<label class="form-check-label" for="slidingAll_b">
+					<input class="form-check-input" type="checkbox" autocomplete="off" id="slidingAll_b">SLIDING ALL</label>
+				</div>
+			</div>
+			<br>
+				<div>
+					<p>Legal information:</p><p>This document does not constitute a commercial offer. </p><p>Due to continuous product development options shown may not always reflect the latest ionBench data.</p><p>Every effort has been made to ensure that the information, descriptions, and images were correct at the time of publication however images may not always reflect the exact version selected.</p>
+				</div>
+			<br>
+			<div id="save_id">
+				<input autocomplete="off" type="button" class="btn btn-floating" id="save_b" value="&rdsh; Save configuration">
+			</div>
+			<br>
+			<div id="modalSave" class="modal" tabindex="-1" role="dialog">
+			  <div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+				  <div class="modal-headerContent">
+					<h2 class="modal-title">Configuration summary</h2>
+				  </div>
+					<img id="modalImg" class="modal-imageResult" width="50%" height="780px"></img>
+				  <div class="modal-bodyContent">
+					<div id="modal1"></div>
+				  	<button type="button" class="closeBTN_Cust btn btn-floating" data-bs-dismiss="modal" id="close_b">&rdsh; Close</button>
+					<button type="button" class="btn btn-floating" id="continue_b">&rdsh; Continue</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<div id="modalConctact" class="modal" tabindex="-1" role="dialog">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content" style="width: 800px;left: 0;padding-bottom: 60px;background-color: #f9f9f9;">
+						<div class="modal-headerContact">
+							<h2 class="modal-title">Contact information</h2>
+						</div>
+						<div class="modal-bodyContact">
+							<div id="modal2">	
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label for="inputFN">First Name <a style="color:#FF0000">*</a></label>
+										<input required autocomplete="off" type="text" class="form-cust form-control contactForm1" name="FirstName" id="inputFN" placeholder="First Name">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="inputLN">Last Name <a style="color:#FF0000">*</a></label>
+										<input required autocomplete="off" type="text" class="form-cust form-control contactForm1" name="LastName" id="inputLN" placeholder="Last Name">
+									</div>
+								</div>		
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label for="inputEMail">Email <a style="color:#FF0000">*</a></label>
+										<input type="email" autocomplete="off" required class="form-cust form-control contactForm1" name="Email" id="inputEMail" placeholder="Email">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="inputPN">Phone Number</label>
+										<input autocomplete="off" type="tel" class="form-cust form-control contactForm1" value="" name="PhoneNumber" id="inputPN" placeholder="Phone Number">
+									</div>
+								</div>
+								<div class="row">
+									<div class="form-group col-md-6">
+										<label for="inputCO">Company</label>
+										<input autocomplete="off" type="text" class="form-cust form-control contactForm1" value="" name="Company" id="inputCO" placeholder="Company">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="inputCZ">Country Zone <a style="color:#FF0000">*</a></label>
+										<select required autocomplete="off"  name="CountryZone" id="inputCZ" class="form-cust form-control contactForm1">
+											<option selected hidden style="color:#6c757d">Choose your country zone</option>
+											<option>USA | CANADA | LATIN AMERICA</option>
+											<option>EUROPE | OTHER</option>
+											<option>ASIA | PACIFIC</option>
+										</select>
+									</div>
+								</div>
+								<div class="row">						
+									<div class="form-group col-md-6">
+										<label for="inputIns">Instrument</label>
+										<input autocomplete="off" type="text" value="" name="Instrument" class="form-cust form-control contactForm1" id="inputIns" placeholder="Instrument">
+									</div>
+									<div class="form-group col-md-6">
+										<label for="inputVP">Vacuum Pump</label>
+										<input autocomplete="off" type="text" value="" name="VacuumPump" class="form-cust form-control contactForm1" id="inputVP" placeholder="Vacuum Pump">
+									</div>
+								</div>
+								<div class="form-group col-md-12">
+									<label for="inputMSN">Message <a style="color:#FF0000">*</a></label>
+									<textarea required autocomplete="off" class="form-cust form-control contactForm1" name="Message" id="inputMSN" placeholder="Message"></textarea>
+								</div>
+								<div class="form-group col-md-4">
+									<label for="inputSpam">ANTISPAM Security <a style="color:#FF0000">*</a></label>
+									<input required autocomplete="off" type="text" class="form-cust form-control contactForm1" name="Spam" id="inputSpam" placeholder="Type IONBENCH">
+								</div> 
+							</div>
+							<div class="modal-footer">
+							<button type="button" class="btn btn-floating" id="continue2_b">&rdsh; Submit</button>	
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="modalThank" class="modal" tabindex="-1" role="dialog">
+			  <div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content" style="width: 800px;left: 0;">
+				  <div class="modal-header">
+					<h5 class="modal-title">Download</h5>
+				  </div>
+				  <div class="modal-body">
+					<div id="modal3"></div>
+					<h5 class="modal-text"><a>The configuration summary will be shortly downloaded.<br>Thank you for using the configurator.</a><br><br><i>We will contact you soon.</h5>
+				  </div>
+				  <div class="modal-footer">
+					<button type="button" style="position: static;" class="closeBTN_Cust btn btn-secondary" data-bs-dismiss="modal">Close</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+			<button onclick="window.location.href='https://ionbench.com/contact/';" class="btn btn-floating" id="ionBenchContact" >&rdsh; Request info</button>
+			<button onclick="window.location.href='https://www.ionbench.com/';" class="btn btn-floating" id="ionBenchHome" >&rdsh; Return to ionBench website</button>
+		</div>
+		<a class="loadingIonbench" id="loadingScren"></a>
+		<!-- <div class="construction"></div> -->
+	</div>	
+<script src="https://static.sketchfab.com/api/sketchfab-viewer-1.12.0.js"></script>
+<!-- <script src="https://smtpjs.com/v3/smtp.js"></script><!-- Service Email -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" crossorigin="anonymous"></script><!-- Generateur PDF -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="./ne58.js?ver=1.0.0"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-709C9CSTRV"></script>
+<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-709C9CSTRV');
+</script>
+
+</body>
+</html>
