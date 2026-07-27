@@ -158,7 +158,7 @@ input[type=range]::-ms-thumb {
 	width: 1200px;
 	left: -25%;
 	background-color: #fdfdfd;
-	height: 800px;
+	height: 830px;
 	border: 1px solid rgba(0,0,0,.2);
 	border-radius: 15px;
 }
