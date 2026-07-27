@@ -387,12 +387,6 @@ input:checked + .slider .off
 
 .slider.round:before {
   border-radius: 50%;}
-img {
-  object-fit: none;
-  width: none;
-  max-width: none;
-  height: none;
-}
 #save_b {
 	display: inline-block;
 	position: fixed;
