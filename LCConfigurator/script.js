@@ -779,7 +779,7 @@ $('#arm1_b').change(function() {
 });
 $('#scr1_b').change(function() {
 	if(this.checked){
-		_camera([1.04, -0.92-0.249+sizeConfig[currentSize].widthOption, 1.12+(currentPosition/100)], [-0.11, -0.002-0.249+sizeConfig[currentSize].widthOption, 0.68+(currentPosition/100)], 2);
+		_camera([1.24, -1.54+sizeConfig[currentSize].widthOption, 1.13+(currentPosition/100)], [-0.3, -0.30+sizeConfig[currentSize].widthOption, 0.68+(currentPosition/100)], 2);
 		_show(myBench.SCR1);
 		_hide(myBench.ARMERG);
 		$('#armerg_b').prop('checked', false);
@@ -813,7 +813,7 @@ $('#key1_b').change(function() {
 });	
 $('#armerg_b').change(function() {
 	if(this.checked){
-		_camera([1.04, -0.92-0.249+sizeConfig[currentSize].widthOption, 1.12+(currentPosition/100)], [-0.11, -0.002-0.249+sizeConfig[currentSize].widthOption, 0.68+(currentPosition/100)], 2);
+		_camera([1.24, -1.54+sizeConfig[currentSize].widthOption, 1.13+(currentPosition/100)], [-0.3, -0.30+sizeConfig[currentSize].widthOption, 0.68+(currentPosition/100)], 2);
 		$('#slidingAll_b').prop('checked', false);
 		$('#slidingAll_b').prop('disabled', true);
 		showMultiple([myBench.ARMERG,myBench.SCR1]);
