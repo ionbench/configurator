@@ -1253,28 +1253,31 @@ $('#save_b').click(function() {//Sauvegarde des données par email
 				if (!err) {
 					$('#modalImg').attr('src',result);
 					resultImg = result;
-				}		
-			});
-			$('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>BCH"+$('#dim_val').val()+$('#ne_id').val()+"</label>"); //remplit la liste
-			$('input:checked').each(function (){	
-				if (this.id=='opendoor_b' || this.id=='pump_b' || this.id=='slidingAll_b' || this.id=='togBtn')
-					return;				
-				
-				let nameOption;								
-				let nameWithDescription;
-				if (this.id=='elec_b') {
-					nameWithDescription = ' Power strip '+$('#elec_id').val()+'.';
-					 nameOption = 'ELEC'+$('#elec_id').val();
-				}else{
-					nameWithDescription = this.nextElementSibling.nextElementSibling.textContent
-					nameOption = this.nextElementSibling.textContent 			
+					$('#modal1').empty();	
+					$('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>BCH"+$('#dim_val').val()+$('#ne_id').val()+"</label>"); //remplit la liste
+					$('input:checked').each(function (){	
+						if (this.id=='opendoor_b' || this.id=='pump_b' || this.id=='slidingAll_b' || this.id=='togBtn')
+							return;				
+						
+						let nameOption;								
+						let nameWithDescription;
+						if (this.id=='elec_b') {
+							nameWithDescription = ' Power strip '+$('#elec_id').val()+'.';
+							 nameOption = 'ELEC'+$('#elec_id').val();
+						}else{
+							nameWithDescription = this.nextElementSibling.nextElementSibling.textContent
+							nameOption = this.nextElementSibling.textContent 			
+						}
+						$('#modal1').append("<label class='optionsTitrResume'>"+nameOption+"</label> <label class='optionsResume'>"+nameWithDescription+"</label>"); //remplit la liste
+										
+						myConfigResult.nameOption.push(nameOption+' :');
+						myConfigResult.desOption.push(nameWithDescription);
+					});	
+					$('#modalSave').modal('show');
 				}
-				$('#modal1').append("<label class='optionsTitrResume'>"+nameOption+"</label> <label class='optionsResume'>"+nameWithDescription+"</label>"); //remplit la liste
-								
-				myConfigResult.nameOption.push(nameOption+' :');
-				myConfigResult.desOption.push(nameWithDescription);
-			});	
-			$('#modalSave').modal('show');
+				$('#save_b').prop("disabled",false);
+			});
+		}else{
 			$('#save_b').prop("disabled",false);
 		}
 	});
