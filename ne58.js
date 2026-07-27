@@ -1249,7 +1249,6 @@ $('#save_b').click(function() {//Sauvegarde des données par email
 	});
 	_api.setCameraLookAtEndAnimationCallback(function(err) {//Positionne la caméra pour capture d'écran
 		if (!err) {
-			// _api.getScreenShot(1920,1080,'image/png', function(err, result) {
 			_api.getScreenShot(579,760,'image/png', function(err, result) {
 				if (!err) {
 					$('#modalImg').attr('src',result);
@@ -1309,23 +1308,7 @@ function checkContactForm(tabElemClass){
 		return;
 	}
 	return true;
-}/*
-function sendEmailPdf(pdfTitle, pdfData, myBody, myTime){//Envoie email
-	Email.send({
-		SecureToken : "ec063471-a789-4a0c-9ff5-e64d651f04ad",//de ElasticeMail
-		To : ['charlie.colle@ionbench.com','pieter.dekocker@ionbench.com', 'franck.subrenat@ionbench.com', 'gaelle.boisaubert@ionbench.com', 'david.dos-santos@ionbench.com', 'alex.souchaire@ionbench.com', 'lucie.kuciel@ionbench.com'],
-		From : "charlie.colle@ionbench.com",
-		Subject : "MS Bench Configuration "+myTime,//Ajoute numero aleatoire ou time
-		Body : myBody,
-		Attachments : [{
-			name : pdfTitle,
-			data: pdfData 
-		}]
-	}).then(
-		message => console.log("Mail sent successfully")
-	);
-}  */    
-
+}
 function genererPDF(){
 	const d = new Date();
 	let heure = d.getHours(); 
@@ -1385,16 +1368,6 @@ function genererPDF(){
 		htmlBody += i + ' : ' + v + '<br>';
 	});
 	htmlBody += '<br><br><br>Bye<br>The Robot ;)</p>';
-	//Envoi email pdf
-	
-	//https://artskydj.github.io/jsPDF/docs/jsPDF.html#output
-	// PJ NOK => trop lourd ou mal formatté ? datauristring -> datauris (btoa nok)
-	
-	// let pdfData = doc.output("datauristring", {filename:titlePDF})
-	
-	//sendEmailPdf(titlePDF, pdfData, htmlBody, idTime);
-	
-
 	var request = new XMLHttpRequest(); //Zapier
     var webhookURL = "https://hooks.zapier.com/hooks/catch/3933452/3wcxlw4/";
     var data = {
