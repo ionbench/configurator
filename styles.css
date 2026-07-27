@@ -387,7 +387,7 @@ input:checked + .slider .off
 
 .slider.round:before {
   border-radius: 50%;}
-.img {
+img {
   object-fit: none;
   width: none;
   max-width: none;
