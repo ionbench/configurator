@@ -498,10 +498,10 @@ input:checked + .slider .off
 	border-radius: 10px;
 	font-weight: regular;
 	font: initial;
-	font-weight: initial;
-	font-size: initial;
-	line-height: initial;
-	font-family: initial;
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	font-family: inherit;
 }
 #ionBenchContact:hover {
 	background-color: #FDFDFD;
@@ -526,10 +526,10 @@ input:checked + .slider .off
 	bottom: 24px;
 	left: 199px;
 	font: initial;
-	font-weight: initial;
-	font-size: initial;
-	line-height: initial;
-	font-family: initial;
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	font-family: inherit;
 }
 #ionBenchHome:hover {
 	color: #FDFDFD;
