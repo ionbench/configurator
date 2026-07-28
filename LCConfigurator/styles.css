@@ -499,6 +499,12 @@ input:checked + .slider .off
 	padding: 15px;
 	border-radius: 10px;
 	font-weight: regular;
+	font: initial;
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	font-family: inherit;
+	width: 160px;
 }
 #ionBenchContact:hover {
 	background-color: #FDFDFD;
@@ -522,6 +528,11 @@ input:checked + .slider .off
 	font-weight: regular;
 	bottom: 24px;
 	left: 199px;
+	font: initial;
+	font-weight: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	font-family: inherit;
 }
 #ionBenchHome:hover {
 	color: #FDFDFD;
