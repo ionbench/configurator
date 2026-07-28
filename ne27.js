@@ -840,7 +840,7 @@ $('#armerg_b').change(function() {
 		$('#key1_b').prop('checked', false);
 		$('#arm1_b').prop('checked', false);
 	}else{
-		_hide(myBench.ARMERG);	
+		hideMultiple([myBench.ARMERG,myBench.SCR1]);
 	}
 });	
 $('#cabletray_b').change(function() {
