@@ -502,6 +502,7 @@ input:checked + .slider .off
 	font-size: inherit;
 	line-height: inherit;
 	font-family: inherit;
+	width: 160px;
 }
 #ionBenchContact:hover {
 	background-color: #FDFDFD;
