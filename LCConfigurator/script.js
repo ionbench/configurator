@@ -798,7 +798,7 @@ $('#key1_b').change(function() {
 	if(this.checked){
 		_camera([1.07, -0.82-0.249+sizeConfig[currentSize].widthOption, 1.1+(currentPosition/100)], [-0.005, -0.075-0.249+sizeConfig[currentSize].widthOption, 0.56+(currentPosition/100)], 2);
 		showMultiple([myBench.KEY1,myBench.KEY1_SLIDING]);	
-		_hide(myBench.ARMERG);
+		hideMultiple([myBench.ARMERG,myBench.SCR1]);
 		$('#armerg_b').prop('checked', false);
 		if ($('#scr1_b').prop('checked')){
 			$('#scr1_b').prop('checked', false);			
