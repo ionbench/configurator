@@ -256,8 +256,9 @@ configurator.init( uid, {//Lance la 3D depuis Sketchfab
 			$('#latcan10l_id').hide();
 			$('#latexhfil_id').hide();
 			$('#elec_id').hide();
-			$('#scr1_id').hide();
-			$('#key1_id').hide();
+			$('#can10l_id').hide();
+			$('#eleclevel_b').hide();
+			$('#exhfil_b').hide();
 			$('#lateleclevel_id').hide();
 			$('#dr3Set_id').hide();
 			$('#allIn').hide();
