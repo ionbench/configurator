@@ -61,9 +61,9 @@ const allStruct = { //Catégorise les structures avec les parties 3D à charger
 		fondID:["BCHTQXS_160_NE00","PORTE_TQXS"],
 		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','solv_id','mnfld_id','can10l_id','eleclevel_id','exhfil_id','hrm_id','latsolv_id','cabletray_id','key1_id','scr1_id'],
 		elec: {"width" :0,"depth":-0.035,"height":0},
-		cablec: {"width" :-0.15,"depth":0,"height":0},
-		cablel: {"width" :-0.25,"depth":0,"height":0},
-		cabler: {"width" :-0.05,"depth":0,"height":0},
+		cablec: {"width" :-0.15,"depth":-0.035,"height":0},
+		cablel: {"width" :-0.25,"depth":-0.035,"height":0},
+		cabler: {"width" :-0.05,"depth":-0.035,"height":0},
 		hrm:0,
 		solv:0.1,
 		trespa:"TQ"
@@ -311,23 +311,6 @@ function dimChange(myWidth){//Modifie les propriété du Bench en fonction de la
 	($('#dimCm_WS_id').val(dimWS[myWidth].Cm));
 	//Calcul valeur deplacement en fonction largeur struct
 	let widthOption = (160-fondWidth)/200;
-	
-	
-	//------------------------------------------------
-	/*
-	if (myWidth == 140 || myWidth == 100 || myWidth == 60){//Condition spécial pour certaine largeur
-		$('#scr1_b').prop('checked', false);
-		$('#scr1_id').hide();
-		$('#arm1_b').prop('checked', false);
-		$('#arm1_id').hide();
-		$('#armerg_b').prop('checked', false);
-		$('#armerg_id').hide();
-		hideMultiple([myBench.SCR1,myBench.KEY1,myBench.KEY1_SLIDING,myBench.ARMERG]);
-	}else{
-		$('#armerg_id').show();
-	}*/
-		
-	
 	//Translation et rotation options
 	reverseUV("normal");//Par défaut l'UV dans le sens normal
 	//Définition des position des éléments en fonction de la largeur
