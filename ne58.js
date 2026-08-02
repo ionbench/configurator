@@ -84,7 +84,7 @@ const allStruct = { //Catégorise les structures avec les parties 3D à charger
 	},
 	"136_ne58":{
 		fondID:["FOND_136_NE58","CAISSON_NE58","CAISSON_NE58_PASSE","CAISSON_NE27_PASSE","PORTE_NE58","VENT_NE58","MOUSSEN_NE58"],
-		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','pc1_id','cabletray_id'],
+		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','pc1_id','cabletray_id','key1_id','scr1_id'],
 		elec: {"width" :0.12,"height":0},
 		cablec: {"width" :-0.24,"height":0},
 		cablel: {"width" :-0.24,"height":0},
@@ -96,7 +96,7 @@ const allStruct = { //Catégorise les structures avec les parties 3D à charger
 	},
 	"160_ne58":{
 		fondID:["FOND_160_NE58","CAISSON_NE58","CAISSON_NE58_PASSE","CAISSON_NE27_PASSE","PORTE_NE58","VENT_NE58","MOUSSEN_NE58"],
-		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','solv_id','mnfld_id','can10l_id','eleclevel_id','exhfil_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','encleft_id',"cabletray_id"],
+		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','solv_id','mnfld_id','can10l_id','eleclevel_id','exhfil_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','encleft_id',"cabletray_id",'key1_id','scr1_id'],
 		elec: {"width" :0,"height":0},
 		cablec: {"width" :0,"height":0},
 		cablel: {"width" :0,"height":0},
