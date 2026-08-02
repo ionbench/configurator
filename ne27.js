@@ -250,7 +250,7 @@ configurator.init( uid, {//Lance la 3D depuis Sketchfab
 				//Montre les 3D par défaut
 				_scale([myBench.PORTE_NE27], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.412035, 0.443115, 0, 1]);
 				_translate([myBench.PC1], [0, 0.068, 0]);//Positionne le support PC
-				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -0.1, 0]);//Positionne les pompes à vide
+				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, 0.078, 0]);//Positionne les pompes à vide
 				_camera([ 3.032247601569891, -2.3712445357760843, 1.0327683091198085], [-0.0020298945761387443, -0.018063977001946542, 0.07912712003138742],0.1);
 			});
 			$('#latcan10l_id').hide();
