@@ -60,7 +60,7 @@ const allStruct = { //Catégorise les structures avec les parties 3D à charger
 	},
 	"100_ne27":{
 		fondID:["FOND_100_NE27","CAISSON_NE27","PORTE_NE27","VENT_NE27","MOUSSEN_NE27","CAISSON_NE27_PASSE"],
-		optionAvailabled:['scr1_id','solv_id','mnfld_id','opeSafe_id','can10l_id','eleclevel_id','exhfil_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','cabletray_id','pc1_id','armerg_id'],
+		optionAvailabled:['scr1_id','solv_id','mnfld_id','opeSafe_id','can10l_id','eleclevel_id','exhfil_id','hrm_id','vpsp_id','odp_id','odk_id','latsolv_id','cabletray_id','pc1_id','armerg_id'],
 		elec: {"width" :0.3,"height":-0.0},
 		cablec: {"width" :-0.14,"height":-0.09},
 		cablel: {"width" :-0.64,"height":-0.04},
@@ -72,7 +72,7 @@ const allStruct = { //Catégorise les structures avec les parties 3D à charger
 	},
 	"120_ne27":{
 		fondID:["FOND_120_NE27","CAISSON_NE27","PORTE_NE27","VENT_NE27","MOUSSEN_NE27","CAISSON_NE27_PASSE"],
-		optionAvailabled:['scr1_id','solv_id','mnfld_id','opeSafe_id','can10l_id','eleclevel_id','exhfil_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','armerg_id','pc1_id','cabletray_id'],
+		optionAvailabled:['scr1_id','solv_id','mnfld_id','opeSafe_id','can10l_id','eleclevel_id','exhfil_id','hrm_id','vpsp_id','odp_id','odk_id','latsolv_id','armerg_id','pc1_id','cabletray_id'],
 		elec: {"width" :0.2,"height":-0},
 		cablec: {"width" :-0.35,"height":-0.11},
 		cablel: {"width" :-0.42,"height":-0.11},
@@ -84,7 +84,7 @@ const allStruct = { //Catégorise les structures avec les parties 3D à charger
 	},
 	"136_ne27":{
 		fondID:["FOND_136_NE27","CAISSON_NE27","PORTE_NE27","VENT_NE27","MOUSSEN_NE27","CAISSON_NE27_PASSE"],
-		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','pc1_id','cabletray_id'],
+		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','hrm_id','vpsp_id','odp_id','odk_id','latsolv_id','pc1_id','cabletray_id'],
 		elec: {"width" :0.12,"height":0},
 		cablec: {"width" :-0.4,"height":0},
 		cablel: {"width" :-0.4,"height":0},
@@ -96,7 +96,7 @@ const allStruct = { //Catégorise les structures avec les parties 3D à charger
 	},
 	"160_ne27":{
 		fondID:["FOND_160_NE27","CAISSON_NE27","PORTE_NE27","VENT_NE27","MOUSSEN_NE27","CAISSON_NE27_PASSE"],
-		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','solv_id','mnfld_id','can10l_id','eleclevel_id','exhfil_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','encleft_id',"cabletray_id"],
+		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','solv_id','mnfld_id','can10l_id','eleclevel_id','exhfil_id','hrm_id','vpsp_id','odp_id','odk_id','latsolv_id','encleft_id',"cabletray_id"],
 		elec: {"width" :0,"height":0},
 		cablec: {"width" :-0.15,"height":0},
 		cablel: {"width" :-0.25,"height":0},
@@ -1063,10 +1063,7 @@ $('#hrm_b').change(function() {
 $('#vpsp_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;
 	if(this.checked){
-		$('#slidepump_b').prop('checked', false);
 		_show(myBench['VPSP_'+currentNe]);
-		_hide(myBench['SLIDEPUMP_'+currentNe]);
-		_hide(myBench['SLIDINGPUMP_'+currentNe]);
 		$('#opendoor_b').prop('checked', true);
 		_rotate([myBench.PORTE_NE27], [Math.PI/2,0, 0, 1], {duration: 1.0});
 		if ($('#encleft_b').prop('checked')){
@@ -1130,49 +1127,6 @@ $('#odp_b').change(function() {
 	}
 });	
 
-//Sliding_Pump
-
-$('#slidepump_b').change(function() {
-	let widthOption = (160-currentFondWidth)/200;
-	if(this.checked){
-		$('#opendoor_b').prop('checked', true);
-		_rotate([myBench.PORTE_NE27], [Math.PI/2,0, 0, 1], {duration: 1.0});
-		if ($('#slidingAll_b').prop('checked')){
-			if ($('#encleft_b').prop('checked')){	
-				_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.5, -1.15+allStruct[currentThisStruct].pompeD, 0.012, 1]);
-				_scale([myBench.POMPE_G], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.5, -1.15+allStruct[currentThisStruct].pompeG, 0.012, 1]);
-				_camera([1.737, -0.429+widthOption, 0.221], [0.403, -0.448+widthOption, -0.0113], 2);
-			}else{		
-				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0.5, allStruct[currentThisStruct].pompeD, 0.012]);
-				_translate([myBench.POMPE_G], [0.5, allStruct[currentThisStruct].pompeG, 0.012]);
-				_camera([1.615, 0.783-widthOption, 0.305], [0.024, 0.546-widthOption, -0.083], 2);
-			}
-		}else{
-			if ($('#encleft_b').prop('checked')){
-				_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeD, 0.012, 1]);
-				_scale([myBench.POMPE_G], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeG, 0.012, 1]);
-				_camera([1.737, -0.429+widthOption, 0.221], [0.403, -0.448+widthOption, -0.0113], 2);
-			}else{		
-				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, allStruct[currentThisStruct].pompeD, 0.012]);
-				_translate([myBench.POMPE_G], [0, allStruct[currentThisStruct].pompeG, 0.012]);	
-				_camera([1.615, 0.783-widthOption, 0.305], [0.024, 0.546-widthOption, -0.083], 2);
-			}
-		}
-		$('#vpsp_b').prop('checked', false);
-		showMultiple([myBench['SLIDEPUMP_'+currentNe],myBench['SLIDINGPUMP_'+currentNe]]);
-		_hide(myBench['VPSP_'+currentNe]);
-	}else{
-		hideMultiple([myBench['SLIDEPUMP_'+currentNe],myBench['SLIDINGPUMP_'+currentNe]]);
-		if ($('#encleft_b').prop('checked')){
-				_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeD, 0, 1]);
-				_scale([myBench.POMPE_G], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeG, 0, 1]);
-			}else{			
-				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, allStruct[currentThisStruct].pompeD, 0]);
-				_translate([myBench.POMPE_G], [0, allStruct[currentThisStruct].pompeG, 0]);
-			}
-	}
-});
-
 
 //Sliding OPEN ----------------------
 
@@ -1201,10 +1155,7 @@ $('#slidingAll_b').change(function() {
 		if ($('#encleft_b').prop('checked')){
 			_translate([myBench.SLIDINGWS], [0.5, 0.94-widthOption, 0],{duration: 2.0});
 			_translate([myBench.KEY1_SLIDING], [0.26, 0.94-widthOption, 0],{duration: 2.0}, enableOptionAfterAnimate);
-			if ($('#slidepump_b').prop('checked')){
-				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0.5, -1.15+allStruct[currentThisStruct].pompeD, 0.012], {duration: 2.0});
-				_translate([myBench.POMPE_G], [0.5, -1.15+allStruct[currentThisStruct].pompeG, 0.012], {duration: 2.0});
-			}else if ($('#vpsp_b').prop('checked')){
+			if ($('#vpsp_b').prop('checked')){
 				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -1.15+allStruct[currentThisStruct].pompeD, 0.002]);
 				_translate([myBench.POMPE_G], [0, -1.15+allStruct[currentThisStruct].pompeG, 0.002]);
 			}else{
@@ -1212,10 +1163,7 @@ $('#slidingAll_b').change(function() {
 				_translate([myBench.POMPE_G], [0, -1.15+allStruct[currentThisStruct].pompeG, 0]);	
 			}
 		}else{
-			if ($('#slidepump_b').prop('checked')){
-				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0.5, allStruct[currentThisStruct].pompeD, 0.012], {duration: 2.0});
-				_translate([myBench.POMPE_G], [0.5, allStruct[currentThisStruct].pompeG, 0.012], {duration: 2.0});
-			}else if ($('#vpsp_b').prop('checked')){
+			if ($('#vpsp_b').prop('checked')){
 				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, allStruct[currentThisStruct].pompeD, 0.002]);
 				_translate([myBench.POMPE_G], [0, allStruct[currentThisStruct].pompeG, 0.002]);
 			}else{
@@ -1231,10 +1179,7 @@ $('#slidingAll_b').change(function() {
 	}else{
 		if ($('#encleft_b').prop('checked')){
 			_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING], [00, 0.94-widthOption, 0],{duration: 2.0}, enableOptionAfterAnimate);
-			if ($('#slidepump_b').prop('checked')){
-				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -1.15+allStruct[currentThisStruct].pompeD, 0.012], {duration: 1.0});
-				_translate([myBench.POMPE_G], [0, -1.15+allStruct[currentThisStruct].pompeG, 0.012], {duration: 1.0});
-			}else if ($('#vpsp_b').prop('checked')){
+			if ($('#vpsp_b').prop('checked')){
 				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -1.15+allStruct[currentThisStruct].pompeD, 0.002]);
 				_translate([myBench.POMPE_G], [0, -1.15+allStruct[currentThisStruct].pompeG, 0.002]);
 			}else{
@@ -1242,10 +1187,6 @@ $('#slidingAll_b').change(function() {
 				_translate([myBench.POMPE_G], [0, -1.15+allStruct[currentThisStruct].pompeG, 0]);	
 			}
 		}else{
-			if ($('#slidepump_b').prop('checked')){
-				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, allStruct[currentThisStruct].pompeD, 0.012], {duration: 1.0});
-				_translate([myBench.POMPE_G], [0, allStruct[currentThisStruct].pompeG, 0.012], {duration: 1.0});
-			}
 			_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING], [0, widthOption, 0],{duration: 1.0});
 		}
         $("#opendoor_b").prop('disabled', false);
@@ -1272,57 +1213,51 @@ $('#save_b').click(function() {//Sauvegarde des données par email
 	let widthOption = (160-currentFondWidth)/200;
 	if ($('#encleft_b').prop('checked')){//Remet toutes les positions à 0 en fonction ENCLEFT ou non
 		_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING], [00, 0.94-widthOption, 0],{duration: 0.1});
-		if ($('#slidepump_b').prop('checked')){
-			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -1.15+allStruct[currentThisStruct].pompeD, 0.012], {duration: 0.1});
-			_translate([myBench.POMPE_G], [0, -1.15+allStruct[currentThisStruct].pompeG, 0.012], {duration: 0.1});
-		}else if ($('#vpsp_b').prop('checked')){
-			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -1.15+allStruct[currentThisStruct].pompeD, 0.002]);
-			_translate([myBench.POMPE_G], [0, -1.15+allStruct[currentThisStruct].pompeG, 0.002]);
+		if ($('#vpsp_b').prop('checked')){
+			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -0.84+allStruct[currentThisStruct].pompeD, 0.002]);
+			_translate([myBench.POMPE_G], [0, -0.84+allStruct[currentThisStruct].pompeG, 0.002]);
 		}else{
-			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -1.15+allStruct[currentThisStruct].pompeD, 0]);
-			_translate([myBench.POMPE_G], [0, -1.15+allStruct[currentThisStruct].pompeG, 0]);	
+			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -0.84+allStruct[currentThisStruct].pompeD, 0]);
+			_translate([myBench.POMPE_G], [0, -0.84+allStruct[currentThisStruct].pompeG, 0]);	
 		}
 	}else{
-		if ($('#slidepump_b').prop('checked')){
-			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, allStruct[currentThisStruct].pompeD, 0.012], {duration: 0.1});
-			_translate([myBench.POMPE_G], [0, allStruct[currentThisStruct].pompeG, 0.012], {duration: 0.1});
-		}
 		_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING], [0, widthOption, 0],{duration: 0.1});
-	}	
+	}		
 	_rotate([myBench.PORTE_NE27], [Math.PI/2,0, 0, 0], {duration: 0.1});
 	_camera([ 3.032247601569891, -2.3712445357760843, 1.0327683091198085], [-0.0020298945761387443, -0.018063977001946542, 0.07912712003138742], 0.1, function(err){
 		$('#save_b').prop("disabled",true);
 	});
 	_api.setCameraLookAtEndAnimationCallback(function(err) {//Positionne la caméra pour capture d'écran
 		if (!err) {
-			// _api.getScreenShot(1920,1080,'image/png', function(err, result) {
 			_api.getScreenShot(579,760,'image/png', function(err, result) {
 				if (!err) {
 					$('#modalImg').attr('src',result);
 					resultImg = result;
-				}		
-			});
-			let neValue = $('#ne_b').prop('checked') ? $('#ne_id').val() : "NE00";
-			$('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>BCH"+$('#dim_val').val()+neValue+"</label>"); //remplit la liste
-			$('input:checked').each(function (){	
-				if (this.id=='opendoor_b' || this.id=='pump_b' || this.id=='slidingAll_b' || this.id=='togBtn' || this.id=='ne_b')
-					return;				
-				
-				let nameOption;								
-				let nameWithDescription;
-				if (this.id=='elec_b') {
-					nameWithDescription = ' Power strip '+$('#elec_id').val()+'.';
-					 nameOption = 'ELEC'+$('#elec_id').val();
-				}else{
-					nameWithDescription = this.nextElementSibling.nextElementSibling.textContent
-					nameOption = this.nextElementSibling.textContent 			
+					$('#modal1').empty();	
+					$('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>BCH"+$('#dim_val').val()+$('#ne_id').val()+"</label>"); //remplit la liste
+					$('input:checked').each(function (){	
+						if (this.id=='opendoor_b' || this.id=='pump_b' || this.id=='slidingAll_b' || this.id=='togBtn')
+							return;				
+						
+						let nameOption;								
+						let nameWithDescription;
+						if (this.id=='elec_b') {
+							nameWithDescription = ' Power strip '+$('#elec_id').val()+'.';
+							 nameOption = 'ELEC'+$('#elec_id').val();
+						}else{
+							nameWithDescription = this.nextElementSibling.nextElementSibling.textContent
+							nameOption = this.nextElementSibling.textContent 			
+						}
+						$('#modal1').append("<label class='optionsTitrResume'>"+nameOption+"</label> <label class='optionsResume'>"+nameWithDescription+"</label>"); //remplit la liste
+										
+						myConfigResult.nameOption.push(nameOption+' :');
+						myConfigResult.desOption.push(nameWithDescription);
+					});	
+					$('#modalSave').modal('show');
 				}
-				$('#modal1').append("<label class='optionsTitrResume'>"+nameOption+"</label> <label class='optionsResume'>"+nameWithDescription+"</label>"); //remplit la liste
-								
-				myConfigResult.nameOption.push(nameOption+' :');
-				myConfigResult.desOption.push(nameWithDescription);
-			});	
-			$('#modalSave').modal('show');
+				$('#save_b').prop("disabled",false);
+			});
+		}else{
 			$('#save_b').prop("disabled",false);
 		}
 	});
