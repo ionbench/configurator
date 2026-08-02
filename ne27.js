@@ -84,7 +84,7 @@ const allStruct = { //Catégorise les structures avec les parties 3D à charger
 	},
 	"136_ne27":{
 		fondID:["FOND_136_NE27","CAISSON_NE27","PORTE_NE27","VENT_NE27","MOUSSEN_NE27","CAISSON_NE27_PASSE"],
-		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id',"pc1_id","arm1_id","cabletray_id"],
+		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','pc1_id','cabletray_id'],
 		elec: {"width" :0.12,"height":0},
 		cablec: {"width" :-0.4,"height":0},
 		cablel: {"width" :-0.4,"height":0},
