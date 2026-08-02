@@ -251,6 +251,8 @@ configurator.init( uid, {//Lance la 3D depuis Sketchfab
 				_scale([myBench.PORTE_NE27], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.412035, 0.443115, 0, 1]);
 				_translate([myBench.PC1], [0, 0.068, 0]);//Positionne le support PC
 				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, 0.078, 0]);//Positionne les pompes à vide
+				
+		pompeD:0.078,
 				_camera([ 3.032247601569891, -2.3712445357760843, 1.0327683091198085], [-0.0020298945761387443, -0.018063977001946542, 0.07912712003138742],0.1);
 			});
 			$('#latcan10l_id').hide();
@@ -259,7 +261,7 @@ configurator.init( uid, {//Lance la 3D depuis Sketchfab
 			$('#can10l_id').hide();
 			$('#eleclevel_id').hide();
 			$('#exhfil_id').hide();
-			$('#lateleclevel_id').hide();			
+			$('#lateleclevel_id').hide();
 			$('#slidepump_id').hide();
 			$('#dr3Set_id').hide();
 			$('#allIn').hide();
@@ -355,7 +357,8 @@ function dimChange(myWidth, ne=null){//Modifie les propriété du Bench en fonct
 	
 	//Choisir structure et remplacer caisson
 	let thisStruct = ne ? allStruct[ne] : allStruct[style[myWidth][0]]; 
-
+	console.log(ne);
+	console.log(thisStruct);
 	//Afficher les checkbox options necessaire
 	hideOptionalDiv();   
 	showOptionalDiv(thisStruct.optionAvailabled);
@@ -604,9 +607,9 @@ $('#encleft_b').change(function(err, ne=null) {
 		}
 		showMultiple([myBench['MOUSSER_'+($('#ne_id').val())], myBench['SEPA_'+($('#ne_id').val())]]);
 		_scale([myBench.HRM_NE27, myBench.BOUCHON_DESSUS, myBench.BOUCHON_COTE,myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);
-		_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeD, 0, 1]);
+		_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.125, 0, 1]);
 		_scale([myBench.POMPE_G], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeG, 0, 1]);
-		_scale([myBench.LATD_TRESPA, myBench.VPSP_NE27, myBench.LATSOLV, myBench.VENT_NE27], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);
+		_scale([myBench.LATD_TRESPA, myBench.LATSOLV, myBench.VENT_NE27], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);
 		_scale([myBench['FOND_'+currentFondWidth+'_'+($('#ne_id').val())]], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
 		
 		_scale([myBench.CAISSON_NE27, myBench.CAISSON_NE27_PASSE, myBench.VPSP_NE27], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.201+widthOption, 0, 1]);
@@ -1068,22 +1071,18 @@ $('#vpsp_b').change(function() {
 		$('#opendoor_b').prop('checked', true);
 		_rotate([myBench.PORTE_NE27], [Math.PI/2,0, 0, 1], {duration: 1.0});
 		if ($('#encleft_b').prop('checked')){
-			_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeD, 0.002, 1]);
-			_scale([myBench.POMPE_G], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeG, 0.002, 1]);
+			_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.125+widthOption, 0.002, 1]);
 			_camera([1.737, -0.429+widthOption, 0.221], [0.403, -0.448+widthOption, -0.0113], 2);
 		}else{		
 			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, allStruct[currentThisStruct].pompeD, 0.002]);
-			_translate([myBench.POMPE_G], [0, allStruct[currentThisStruct].pompeG, 0.002]);
 			_camera([1.615, 0.783-widthOption, 0.305], [0.024, 0.546-widthOption, -0.083], 2);
 		}				
 	}else{
 		_hide(myBench['VPSP_'+currentNe]);
 		if ($('#encleft_b').prop('checked')){	
-			_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeD, 0, 1]);
-			_scale([myBench.POMPE_G], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeG, 0, 1]);
+			_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.125+widthOption, 0, 1]);
 		}else{		
 			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, allStruct[currentThisStruct].pompeD, 0]);
-			_translate([myBench.POMPE_G], [0, allStruct[currentThisStruct].pompeG, 0]);
 		}	
 	}
 });
@@ -1215,10 +1214,10 @@ $('#save_b').click(function() {//Sauvegarde des données par email
 	if ($('#encleft_b').prop('checked')){//Remet toutes les positions à 0 en fonction ENCLEFT ou non
 		_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING], [00, 0.94-widthOption, 0],{duration: 0.1});
 		if ($('#vpsp_b').prop('checked')){
-			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -0.84+allStruct[currentThisStruct].pompeD, 0.002]);
+			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -1.125+widthOption, 0.002]);
 			_translate([myBench.POMPE_G], [0, -0.84+allStruct[currentThisStruct].pompeG, 0.002]);
 		}else{
-			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -0.84+allStruct[currentThisStruct].pompeD, 0]);
+			_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -1.125+widthOption, 0]);
 			_translate([myBench.POMPE_G], [0, -0.84+allStruct[currentThisStruct].pompeG, 0]);	
 		}
 	}else{
