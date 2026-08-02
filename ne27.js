@@ -260,7 +260,7 @@ configurator.init( uid, {//Lance la 3D depuis Sketchfab
 			$('#eleclevel_id').hide();
 			$('#exhfil_id').hide();
 			$('#lateleclevel_id').hide();			
-			$('#slidepump_id_id').hide();
+			$('#slidepump_id').hide();
 			$('#dr3Set_id').hide();
 			$('#allIn').hide();
 			$('#dimCm_WS_id').val(dimWS[currentWidth].Cm);
