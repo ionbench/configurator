@@ -85,7 +85,7 @@ const allStruct = { //Catégorise les structures avec les parties 3D à charger
 	},
 	"160_ne78":{
 		fondID:["FOND_160_NE78","CAISSON_NE78","PORTED_NE78","PORTEG_NE78","CAISSON_NE58_PASSE" ,"CAISSON_NE27_PASSE"],		
-		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','encleft_id','pc1_id','arm1_id','cabletray_id','key1_id','scr1_id'],
+		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','hrm_id','vpsp_id','odp_id','odk_id','slidepump_id','latsolv_id','encleft_id','pc1_id','arm1_id','cabletray_id'],
 		elec: {"width" :0,"height":0},
 		cablec: {"width" :0,"height":0},
 		cablel: {"width" :0,"height":0},
@@ -245,8 +245,10 @@ configurator.init( uid, {//Lance la 3D depuis Sketchfab
 			$('#latexhfil_id').hide();
 			$('#elec_id').hide();
 			$('#can10l_id').hide();
-			$('#eleclevel_id').hide();
-			$('#exhfil_id').hide();
+			$('#mnfld_id').hide();
+			$('#solv_id').hide();
+			$('#eleclevel_b').hide();
+			$('#exhfil_b').hide();
 			$('#lateleclevel_id').hide();
 			$('#dr3Set_id').hide();
 			$('#allIn').hide();
