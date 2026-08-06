@@ -937,6 +937,7 @@ $('#uh3_b').change(function() {
 		$('#uh4_b').prop('checked', false);
 		$('#uh3_b').prop('disabled', true);
 		$('#uh4_b').prop('disabled', false);
+		$('#uh1_b').prop('disabled', false);
 		$('#moveLUH1_id').hide();
 		$('#moveLUH3_id').show();
 		$('#moveLUH4_id').hide();
@@ -982,6 +983,7 @@ $('#uh4_b').change(function() {
 		$('#uh3_b').prop('checked', false);
 		$('#uh4_b').prop('disabled', true);
 		$('#uh3_b').prop('disabled', false);
+		$('#uh1_b').prop('disabled', false);
 		$('#moveLUH1_id').hide();
 		$('#moveLUH3_id').hide();
 		$('#moveLUH4_id').show();
