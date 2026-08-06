@@ -510,7 +510,7 @@ $('#latdL_b').click(function() {
 		$(this).prop("disabled",true);
 		$('#latdR_b').prop("disabled",false);
 		_camera([1.44, -2.05+widthOption, 0.595], [-0.056, -0.778+widthOption, 0.065], 2);	
-		_scale([myBench.LATD_TRESPA], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);	
+		_scale([myBench.LATD_TRESPA], [-1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);	
 		if ($('#encleft_b').prop('checked')){		
 			_scale([myBench.PC1], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, -0.068-widthOption, 0, 1]);
 		}else{	
@@ -575,7 +575,8 @@ $('#encleft_b').change(function(err, ne=null) {
 		_scale([myBench.BOUCHON_DESSUS, myBench.BOUCHON_COTE,myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption+0.13, 0, 1]);
 		_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, allStruct[currentThisStruct].pompeD, 0, 1]);
 		_scale([myBench.POMPE_G], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, allStruct[currentThisStruct].pompeG, 0, 1]);
-		_scale([myBench.CAISSON_NE78, myBench.HRM_NE78, myBench.CAISSON_NE58_PASSE, myBench.CAISSON_NE27_PASSE, myBench.LATD_TRESPA, myBench.SLIDEPUMP_NE78, myBench.SLIDINGPUMP_NE78, myBench.VPSP_NE78, myBench.LATSOLV], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);
+		_scale([myBench.CAISSON_NE78, myBench.HRM_NE78, myBench.CAISSON_NE58_PASSE, myBench.CAISSON_NE27_PASSE, myBench.SLIDEPUMP_NE78, myBench.SLIDINGPUMP_NE78, myBench.VPSP_NE78, myBench.LATSOLV], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);
+		_scale([myBench.LATD_TRESPA], [-1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);
 		_scale([myBench['FOND_'+currentFondWidth+'_'+($('#ne_id').val())]], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
 		_scale([myBench.PORTEG_NE78], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.412085, -0.601-0.156796-widthOption, 0, 1]);
 		_scale([myBench.PORTED_NE78], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.412085, -0.601+0.757933-widthOption, 0, 1]);
