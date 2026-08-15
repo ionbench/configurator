@@ -1295,10 +1295,17 @@ $('#save_b').click(function() {//Sauvegarde des données par email
                                             
                             myConfigResult.nameOption.push(nameOption);
                             myConfigResult.desOption.push('- ' + nameWithDescription);
-			});	
-			$('#modalSave').modal('show');
-			$('#save_b').prop("disabled",false);
-		}
+							});	
+					$('#modalSave').modal('show');
+                    $('#save_b').prop("disabled", false);
+				});
+                } else {
+                    $('#save_b').prop("disabled", false);
+                }
+            });
+        } else {
+            $('#save_b').prop("disabled", false);
+        }
 	});
 });
 $('#continue_b').click(function() {	
