@@ -1273,7 +1273,7 @@ $('#save_b').click(function() {//Sauvegarde des données par email
                         resultImg = compressedResult;
                         $('#modalImg').attr('src', resultImg);
                         $('#modal1').empty();	
-                        $('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>BCH" + $('#dim_val').val() + "97-ICP-OES" + "</label>");
+                        $('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>BCH"+$('#dim_val').val()+$('#ne_id').val()+"</label>"); //remplit la liste
                         
                         $('input:checked').each(function () {	
                             if (this.id == 'opendoor_b' || this.id == 'pump_b' || this.id == 'slidingAll_b' || this.id == 'togBtn')
