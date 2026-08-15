@@ -358,19 +358,6 @@ function neChange(myNoiseEnc){//Modifie le bench en fonction du caisson acoustiq
 	dimChange(currentWidth, myNoise);
 }
 
-// function changeDimSelector(arrayOfNe){//Curseur des largeurs de plan de travail
-	
-	// $.each(arrayOfNe, function(key, value){
-	// let optionNe = value.split("_")[1].toUpperCase();
-	// $('#ne_id').prop("disabled",true);
-	// $('#ne_id').val(optionNe);
-	// $('#Model_BCH_id').val('BCH'+currentWidth+optionNe);
-	// $('#ne_b').prop("checked",false);
-	// $('#ne_b').prop("disabled",true);
-	// });
-		
-// }
-
 // EVENEMENT
 
 
@@ -462,72 +449,6 @@ $('#bouchSide_b').click(function() {
 			_camera([-1.52, 1.39-widthOption, 1], [0.36, 0.09-widthOption, 0.28], 2);			
 		}
 });
-/*
-//Checkbox options
-$('#encleft_b').change(function(err, ne=null) {
-	let thisStruct = ne ? allStruct[ne] : allStruct[currentThisStruct]; 
-	let fondWidth = thisStruct.fondID[0].split("_")[1];
-	let widthOption = (160-fondWidth)/200;
-	let widthScreen = (190-currentWidth)/200;
-	if(this.checked){
-		_camera([2.08, 1.61, 0.7], [0.013, 0.384, 0.068], 2);
-		hideMultiple([myBench.MOUSSEN_NE27]);
-		_scale([myBench.PC1], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, -0.068-widthOption, 0, 1]);
-		_scale([myBench.SCR1, myBench.ARMERG], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, -widthScreen, 0, 1]);
-		_scale([myBench.DR3, myBench.KEY1, myBench.KEY1_SLIDING, myBench.SLIDEWS, myBench.SLIDINGWS], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.94-widthOption, 0, 1]);
-		if ($('#latsolv_b').prop('checked')){	
-		_scale([myBench.CAN10L, myBench.EXHFIL, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0.02, -widthOption-0.99, 0.148, 1]);			
-		}else{
-		_scale([myBench.CAN10L, myBench.EXHFIL, myBench.SOLV, myBench.SOLV_MNFLD, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, -thisStruct.solv+0.019, 0, 1]);
-		}
-		showMultiple([myBench['MOUSSER_'+($('#ne_id').val())], myBench['SEPA_'+($('#ne_id').val())]]);
-		_scale([myBench.HRM_NE27, myBench.BOUCHON_DESSUS, myBench.BOUCHON_COTE,myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);
-		_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeD, 0, 1]);
-		_scale([myBench.POMPE_G], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.15+allStruct[currentThisStruct].pompeG, 0, 1]);
-		_scale([myBench.LATD_TRESPA, myBench.VPSP_NE27, myBench.LATSOLV, myBench.VENT_NE27], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);
-		_scale([myBench['FOND_'+currentFondWidth+'_'+($('#ne_id').val())]], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
-		
-		_scale([myBench.CAISSON_NE27, myBench.CAISSON_NE27_PASSE, myBench.VPSP_NE27], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -1.201+widthOption, 0, 1]);
-		_scale([myBench.PORTE_TQXS], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.41213, -1.201+0.44213+widthOption, 0, 1]);
-		_scale([myBench.ELEC_EU, myBench.ELEC_US, myBench.ELEC_UK, myBench.ELEC_DE, myBench.ELEC_CH], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.85-thisStruct.elec.width, thisStruct.elec.height, 1]);
-		
-		_scale([myBench.CABLETRAY_C], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, -allStruct[currentThisStruct].cablec.width, allStruct[currentThisStruct].cablec.height, 1]);
-		_scale([myBench.CABLETRAY_R], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, -allStruct[currentThisStruct].cabler.width, allStruct[currentThisStruct].cabler.height, 1]);
-		_scale([myBench.CABLETRAY_L], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, -allStruct[currentThisStruct].cablel.width, allStruct[currentThisStruct].cablel.height, 1]);
-		$('#opendoor_b').prop('checked', false);
-		$('#slidingAll_b').prop('checked', false);
-		reverseUV("miroir");
-	}else{
-		_camera([2.08, 1.61, 0.7], [0.013, 0.384, 0.068], 2);
-		hideMultiple([myBench.MOUSSER_NE27, myBench.SEPA_NE27]);
-		_scale([myBench.PC1], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.068+widthOption, 0, 1]);
-		_scale([myBench.SCR1, myBench.ARMERG], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, widthScreen, 0, 1]);
-		_scale([myBench.DR3, myBench.KEY1, myBench.KEY1_SLIDING, myBench.SLIDEWS, myBench.SLIDINGWS], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);
-		if ($('#latsolv_b').prop('checked')){	
-		_scale([myBench.CAN10L, myBench.EXHFIL, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.02, widthOption+0.99, 0.148, 1]);			
-		}else{
-		_scale([myBench.SOLV, myBench.SOLV_MNFLD, myBench.CAN10L, myBench.EXHFIL, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, thisStruct.solv, 0, 1]);
-		}
-		_scale([myBench.POMPE_D, myBench.ODP, myBench.ODK], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, allStruct[currentThisStruct].pompeD, 0, 1]);
-		_scale([myBench.POMPE_G], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, allStruct[currentThisStruct].pompeG, 0, 1]);
-		showMultiple([myBench['MOUSSEN_'+($('#ne_id').val())]]);
-		_scale([myBench.HRM_NE27, myBench.BOUCHON_DESSUS, myBench.BOUCHON_COTE,myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE, myBench.CAISSON_NE27_PASSE], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -widthOption, 0, 1]);
-		_scale([myBench.LATD_TRESPA, myBench.VPSP_NE27, myBench.LATSOLV, myBench.VENT_NE27], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -widthOption, 0, 1]);
-		_scale([myBench['FOND_'+currentFondWidth+'_'+($('#ne_id').val())]], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1]);
-		
-		_scale([myBench.CAISSON_NE27, myBench.VPSP_NE27], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -widthOption, 0, 1]);
-		_scale([myBench.PORTE_TQXS], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.412035, 0.443115-widthOption, 0, 1]);
-		_scale([myBench.ELEC_EU, myBench.ELEC_US, myBench.ELEC_UK, myBench.ELEC_DE, myBench.ELEC_CH], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, thisStruct.elec.width, thisStruct.elec.height, 1]);
-		
-		_scale([myBench.CABLETRAY_C], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, allStruct[currentThisStruct].cablec.width, allStruct[currentThisStruct].cablec.height, 1]);
-		_scale([myBench.CABLETRAY_R], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, allStruct[currentThisStruct].cabler.width, allStruct[currentThisStruct].cabler.height, 1]);
-		_scale([myBench.CABLETRAY_L], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, allStruct[currentThisStruct].cablel.width, allStruct[currentThisStruct].cablel.height, 1]);
-		
-		$('#opendoor_b').prop('checked', false);
-		$('#slidingAll_b').prop('checked', false);
-		reverseUV("normal");
-	}
-});*/
 
 $('#grey_b').change(function() {
 	if(this.checked){
@@ -950,7 +871,7 @@ $('#save_b').click(function() {//Sauvegarde des données par email
 		_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING], [0, widthOption, 0],{duration: 0.1});
 		_translate([myBench.DR3T ], [0.0346, widthOption, 0],{duration: 1.0});
 	}		
-	_rotate([myBench.PORTE_NE58], [Math.PI/2,0, 0, 0], {duration: 0.1});
+	_rotate([myBench.PORTE_TQXS, myBench.PORTE_TQXSS], [Math.PI/2,0, 0, 0], {duration: 0.1});
 	_camera([2.9199309882183164, -2.407788787526358, 1.299959525793121], [-0.11434650792771223, -0.054608228752221794, 0.346318336704698], 0.1, function(err){
 		$('#save_b').prop("disabled",true);
 	});
