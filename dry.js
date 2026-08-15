@@ -61,9 +61,9 @@ const allStruct = { //Catégorise les structures avec les parties 3D à charger
 		fondID:["BCHTQXS_160_NE00","PORTE_TQXS"],
 		optionAvailabled:['dr3_id','slidews_id','opeSafe_id','arm1_id','solv_id','mnfld_id','can10l_id','eleclevel_id','exhfil_id','hrm_id','latsolv_id','cabletray_id','key1_id','scr1_id'],
 		elec: {"width" :0,"depth":-0.035,"height":0},
-		cablec: {"width" :-0.15,"depth":-0.035,"height":0},
-		cablel: {"width" :-0.25,"depth":-0.035,"height":0},
-		cabler: {"width" :-0.05,"depth":-0.035,"height":0},
+		cablec: {"width" :0,"depth":-0.035,"height":0},
+		cablel: {"width" :0,"depth":-0.035,"height":0},
+		cabler: {"width" :0,"depth":-0.035,"height":0},
 		hrm:0,
 		solv:0.1,
 		trespa:"TQ"
