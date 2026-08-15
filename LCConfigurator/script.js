@@ -1104,7 +1104,23 @@ $('#slidingAll_b').change(function() {
 	_translate([myBench.BCHPOS], [(sizeConfig[currentSize].depthPOS)+valPos, sizeConfig[currentSize].widthPOS+0, sizeConfig[currentSize].heightPOS+(currentPosition/100)],{duration: 1.0});
 	}
 });
-
+function compressBase64(base64Data, maxWidth, quality, callback) {
+    let img = new Image();
+    img.onload = function() {
+        let canvas = document.createElement('canvas');
+        let scale = maxWidth / img.width;
+        canvas.width = maxWidth;
+        canvas.height = img.height * scale;
+        
+        let ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        
+        // Exporte en JPEG compressé (ex: quality = 0.6)
+        let compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+        callback(compressedBase64);
+    };
+    img.src = base64Data;
+}
 //SAVE
 $('#save_b').click(function() {	
 	$('#modal1').empty(); //vide la liste
@@ -1112,45 +1128,45 @@ $('#save_b').click(function() {
 	_camera([2.6582556881878707, -2.381525864717656, 1.1942529072649997], [-0.12663708922735215, -0.0749888077102193, 0.40787874266564916], 0.1, function(err){
 		$('#save_b').prop("disabled",true);
 	});
-	_api.setCameraLookAtEndAnimationCallback(function(err) {
-		if (!err) {
-			_api.getScreenShot(579,760,'image/png', function(err, result) {
-				if (!err) {
-					$('#modalImg').attr('src',result);
-					resultImg = result;
-				}		
-			});
-			// $('#modal1').append("<b>"+($('#Model_BCH_id').val())+"</b>"); //remplit la liste
-			$('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>"+$('#Model_BCH_id').val()+"</label>"); //remplit la liste
-			$('input:checked').each(function (){	
-				if (this.id=='slidingAll_b' || this.id=='togBtn')
-					return;	
-				let nameOption;								
-				let nameWithDescription;
-				if (this.id=='uh1_b'  || this.id=='uh3_b' || this.id=='uh4_b') {
-					if (this.id=='uh1_b'){
-						nameOption = "UH1"
-						nameWithDescription = " 46 to 76 cm height adjustment"
-					}else if (this.id=='uh3_b'){
-						nameOption = "UH3"
-						nameWithDescription = " 56 to 86 cm height adjustment"
-					}else{
-						nameOption = "UH4"
-						nameWithDescription = " 61 to 96 cm height adjustment"
-					}
-				}else{
-					nameWithDescription = this.nextElementSibling.nextElementSibling.textContent
-					nameOption = this.nextElementSibling.textContent
-				}
-				// $('#modal1').append("<p><p><b>"+nameOption+"</b> : <i>"+nameWithDescription+"</i></p></p>"); //remplit la liste
-				$('#modal1').append("<label class='optionsTitrResume'>"+nameOption+"</label> <label class='optionsResume'>"+nameWithDescription+"</label>"); //remplit la liste
-								
-				myConfigResult.nameOption.push(nameOption+' :');
-				myConfigResult.desOption.push(nameWithDescription);
-			});	
-			$('#modalSave').modal('show');
-			$('#save_b').prop("disabled",false);
-		}
+	_api.setCameraLookAtEndAnimationCallback(function(err) { // Positionne la caméra pour capture d'écran
+        if (!err) {
+            _api.getScreenShot(800, 1050, 'image/jpeg', function(err, rawResult) {
+                if (!err) {
+                    compressBase64(rawResult, 500, 0.8, function(compressedResult) {
+                        resultImg = compressedResult;
+                        $('#modalImg').attr('src', resultImg);
+                        $('#modal1').empty();	
+						$('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>"+$('#Model_BCH_id').val()+"</label>"); //remplit la liste
+						$('input:checked').each(function (){	
+							if (this.id=='slidingAll_b' || this.id=='togBtn')
+								return;	
+							let nameOption;								
+							let nameWithDescription;
+							if (this.id=='uh1_b'  || this.id=='uh3_b' || this.id=='uh4_b') {
+							if (this.id=='uh1_b'){
+								nameOption = "UH1"
+								nameWithDescription = " 46 to 76 cm height adjustment"
+							}else if (this.id=='uh3_b'){
+								nameOption = "UH3"
+								nameWithDescription = " 56 to 86 cm height adjustment"
+							}else{
+								nameOption = "UH4"
+								nameWithDescription = " 61 to 96 cm height adjustment"
+							}
+							}else{
+								nameWithDescription = this.nextElementSibling.nextElementSibling.textContent
+								nameOption = this.nextElementSibling.textContent
+							}
+							$('#modal1').append("<label class='optionsTitrResume'>"+nameOption+"</label> <label class='optionsResume'>"+nameWithDescription+"</label>"); //remplit la liste	
+							myConfigResult.nameOption.push(nameOption);
+                            myConfigResult.desOption.push('- ' + nameWithDescription);
+						});	
+					$('#modalSave').modal('show');
+					$('#save_b').prop("disabled",false);
+					});
+				} else {
+            $('#save_b').prop("disabled", false);
+        }
 	});
 });
 $('#continue_b').click(function() {	
@@ -1234,38 +1250,33 @@ function genererPDF(){
 	doc.save(titlePDF);
 	
 	//Envoi email body
-	let htmlBody = '<p> Hello ionBench Team!<br> An user has finished a LC ionBench configuration : <br> <h2>Configuration:</h2><br><img width="250" height="329" src="'+resultImg+'"><br>';
-	htmlBody += '<h3>'+($('#Model_BCH_id').val())+'</h3><br>';
-	htmlBody += myConfigResult.nameOption.join('<br>');
-	htmlBody += '<br><br><h2>Contact:</h2><br>';
-	$.each(myConfigResult.Contact, function (i, v) { 
-		htmlBody += i + ' : ' + v + '<br>';
-	});
-	htmlBody += '<br><br><br>Bye<br>The Robot ;)</p>';
-	
-	//Envoi email pdf
-	//https://artskydj.github.io/jsPDF/docs/jsPDF.html#output
-	// PJ NOK => trop lourd ou mal formatté ? datauristring -> datauris (btoa nok)
-	//let pdfData = doc.output("datauristring", {filename:titlePDF})
-	//sendEmailPdf(titlePDF, pdfData, htmlBody, idTime);
-	var request = new XMLHttpRequest(); //Zapier
-    var webhookURL = "https://hooks.zapier.com/hooks/catch/3933452/3wcxlw4/";
-	var data = {
-		"FirstName":myConfigResult.Contact.FirstName,
-		"LastName":myConfigResult.Contact.LastName,
-		"Email":myConfigResult.Contact.Email,
-		"PhoneNumber":myConfigResult.Contact.PhoneNumber,
-		"Company":myConfigResult.Contact.Company,
-		"CountryZone":myConfigResult.Contact.CountryZone,
-		"Message":myConfigResult.Contact.Message,
-		"Instrument":myConfigResult.Contact.Instrument,
-		"VacuumPump":myConfigResult.Contact.VacuumPump,
-		"Subject":"MS Bench Configuration "+idTime,
-		"Body":htmlBody,
+	let htmlBody = 'Model: '+($('#Model_BCH_id').val())+' Options: ';
+	htmlBody += myConfigResult.nameOption.join(' + ');
+	//Config Zoho 
+	var request = new XMLHttpRequest();
+    var webhookURL = "https://flow.zoho.eu/20112317789/flow/webhook/incoming?zapikey=1001.2484ab9ae886191a0f8f003d88f715b1.548fa36d2f123850045eb1a7d4c90883&isdebug=false";
+    var data = {
+		"firstname":myConfigResult.Contact.FirstName,
+		"name":myConfigResult.Contact.LastName,
+		"email":myConfigResult.Contact.Email,
+		"phonenumber":myConfigResult.Contact.PhoneNumber,
+		"company":myConfigResult.Contact.Company,
+		"countryzone":myConfigResult.Contact.CountryZone,
+		"message":myConfigResult.Contact.Message,
+		"system":myConfigResult.Contact.Instrument,
+		"vacuumpump":myConfigResult.Contact.VacuumPump,
+		"subject":"ICP-OES Bench Configuration "+idTime,
+		"options":htmlBody,
+		"photo":resultImg
     };
+	var payloadObj = {
+    "name":"configurator",
+    "data": data
+	};
+	var payloadString = "payload=" + encodeURIComponent(JSON.stringify(payloadObj));
     request.open("POST", webhookURL, true);
     request.setRequestHeader('Content-type','application/x-www-form-urlencoded');
-    request.send(JSON.stringify(data));
+    request.send(payloadString);
 }
 $('#continue2_b').click(function() {
 	if (checkContactForm($('.contactForm1'))){
