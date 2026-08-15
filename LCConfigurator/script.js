@@ -1129,44 +1129,45 @@ $('#save_b').click(function() {
 		$('#save_b').prop("disabled",true);
 	});
 	_api.setCameraLookAtEndAnimationCallback(function(err) { // Positionne la caméra pour capture d'écran
-        if (!err) {
-            _api.getScreenShot(800, 1050, 'image/jpeg', function(err, rawResult) {
-                if (!err) {
-                    compressBase64(rawResult, 500, 0.8, function(compressedResult) {
-                        resultImg = compressedResult;
-                        $('#modalImg').attr('src', resultImg);
-                        $('#modal1').empty();	
-						$('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>"+$('#Model_BCH_id').val()+"</label>"); //remplit la liste
-						$('input:checked').each(function (){	
-							if (this.id=='slidingAll_b' || this.id=='togBtn')
-								return;	
-							let nameOption;								
-							let nameWithDescription;
-							if (this.id=='uh1_b'  || this.id=='uh3_b' || this.id=='uh4_b') {
-							if (this.id=='uh1_b'){
-								nameOption = "UH1"
-								nameWithDescription = " 46 to 76 cm height adjustment"
-							}else if (this.id=='uh3_b'){
-								nameOption = "UH3"
-								nameWithDescription = " 56 to 86 cm height adjustment"
-							}else{
-								nameOption = "UH4"
-								nameWithDescription = " 61 to 96 cm height adjustment"
-							}
-							}else{
-								nameWithDescription = this.nextElementSibling.nextElementSibling.textContent
-								nameOption = this.nextElementSibling.textContent
-							}
-							$('#modal1').append("<label class='optionsTitrResume'>"+nameOption+"</label> <label class='optionsResume'>"+nameWithDescription+"</label>"); //remplit la liste	
-							myConfigResult.nameOption.push(nameOption);
-                            myConfigResult.desOption.push('- ' + nameWithDescription);
+	if (!err) {
+		_api.getScreenShot(800, 1050, 'image/jpeg', function(err, rawResult) {
+			if (!err) {
+				compressBase64(rawResult, 500, 0.8, function(compressedResult) {
+					resultImg = compressedResult;
+					$('#modalImg').attr('src', resultImg);
+					$('#modal1').empty();	
+					$('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>"+$('#Model_BCH_id').val()+"</label>"); //remplit la liste
+					$('input:checked').each(function (){	
+						if (this.id=='slidingAll_b' || this.id=='togBtn')
+							return;	
+						let nameOption;								
+						let nameWithDescription;
+						if (this.id=='uh1_b'  || this.id=='uh3_b' || this.id=='uh4_b') {
+						if (this.id=='uh1_b'){
+							nameOption = "UH1"
+							nameWithDescription = " 46 to 76 cm height adjustment"
+						}else if (this.id=='uh3_b'){
+							nameOption = "UH3"
+							nameWithDescription = " 56 to 86 cm height adjustment"
+						}else{
+							nameOption = "UH4"
+							nameWithDescription = " 61 to 96 cm height adjustment"
+						}
+						}else{
+							nameWithDescription = this.nextElementSibling.nextElementSibling.textContent
+							nameOption = this.nextElementSibling.textContent
+						}
+						$('#modal1').append("<label class='optionsTitrResume'>"+nameOption+"</label> <label class='optionsResume'>"+nameWithDescription+"</label>"); //remplit la liste	
+						myConfigResult.nameOption.push(nameOption);
+						myConfigResult.desOption.push('- ' + nameWithDescription);
 						});	
-					$('#modalSave').modal('show');
-					$('#save_b').prop("disabled",false);
+						$('#modalSave').modal('show');
+						$('#save_b').prop("disabled",false);
 					});
 				} else {
-            $('#save_b').prop("disabled", false);
-        }
+				$('#save_b').prop("disabled", false);
+				}
+		});
 	});
 });
 $('#continue_b').click(function() {	
