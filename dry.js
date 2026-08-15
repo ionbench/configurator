@@ -201,8 +201,8 @@ configurator.init( uid, {//Lance la 3D depuis Sketchfab
 				//Montre les 3D par défaut
 				_scale([myBench.PORTE_TQXS], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.4473, 0.276, 0, 1]);
 				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -0.1, 0]);//Positionne les pompes à vide
-				_scale([myBench.KEY1, myBench.KEY1_SLIDING, myBench.SLIDEWS, myBench.SLIDINGWS], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.0346, 0, 0, 1]);
-				_scale([myBench.DR3, myBench.DR3T], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.0346, 0, 0, 1]);
+				_scale([myBench.KEY1, myBench.KEY1_SLIDING, myBench.SLIDEWS, myBench.SLIDINGWS], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.0346, 0.01, 0, 1]);
+				_scale([myBench.DR3, myBench.DR3T], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.0346, 0.01, 0, 1]);
 				_scale([myBench.CAN10L, myBench.SOLV, myBench.EXHFIL, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0.1, 0.02, 1]);
 				_scale([myBench.CABLETRAY_C, myBench.CABLETRAY_R, myBench.CABLETRAY_L, myBench.ELEC_EU, myBench.ELEC_US, myBench.ELEC_UK, myBench.ELEC_DE, myBench.ELEC_CH], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.035, 0, 0, 1]);
 				_scale([myBench.BOUCHON_DESSUS, myBench.BOUCHON_COTE,myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.035, 0.094, 0, 1]);
@@ -316,8 +316,8 @@ function dimChange(myWidth){//Modifie les propriété du Bench en fonction de la
 	//Définition des position des éléments en fonction de la largeur
 	_scale([myBench.PC1], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);
 	_scale([myBench.SCR1, myBench.ARMERG], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, widthScreen, 0, 1]);
-	_scale([myBench.DR3, myBench.DR3T], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.0346, widthOption, 0, 1]);
-	_scale([myBench.KEY1, myBench.KEY1_SLIDING, myBench.SLIDEWS, myBench.SLIDINGWS], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.0346, widthOption, 0, 1]);
+	_scale([myBench.DR3, myBench.DR3T], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.0346, 0.01+widthOption, 0, 1]);
+	_scale([myBench.KEY1, myBench.KEY1_SLIDING, myBench.SLIDEWS, myBench.SLIDINGWS], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.0346, 0.01+widthOption, 0, 1]);
 	_scale([myBench.CAN10L, myBench.SOLV, myBench.EXHFIL, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, thisStruct.solv, 0.02, 1]);
 	_scale([myBench.LATSOLV], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -widthOption, 0, 1]);
 	_scale([myBench.SOLV_MNFLD], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -widthOption, 0, 1]);
@@ -394,10 +394,6 @@ $('#dim_id').change(function() {//Curseur des largeurs de plan de travail
 	$('#dimInch_val').val($('#tickmarks option[value="'+this.value+'"]').attr('inch'));
 });
 
-// $('#ne_id').change(function() {//Menu déroulant des caissons acoustique
-		// neChange(this.value);
-// });
-
 $('#elec_id').change(function() {//Choix menu déroulant des elec
 	let widthOption = (160-currentFondWidth)/200;
 		elecChange(this.value);
@@ -431,11 +427,7 @@ $('#bouchUp_b').click(function() {
 		$('#bouchSide_b').prop("disabled",false);
 		showMultiple([myBench.BOUCHE_DESSUS, myBench.BOUCHON_COTE]);
 		hideMultiple([myBench.BOUCHON_DESSUS, myBench.BOUCHE_COTE]);		
-		if ($('#encleft_b').prop('checked')){		
-			_camera([-1.28, -1.42+widthOption, 0.58], [0.33, -0.11+widthOption, -0.02], 2);	
-		}else{
-			_camera([-1.52, 1.39-widthOption, 1], [0.36, 0.09-widthOption, 0.28], 2);			
-		}
+		_camera([-1.52, 1.39-widthOption, 1], [0.36, 0.09-widthOption, 0.28], 2);
 });
 $('#bouchSide_b').click(function() {
 	let widthOption = (160-currentFondWidth)/200;
@@ -443,11 +435,7 @@ $('#bouchSide_b').click(function() {
 		$('#bouchUp_b').prop("disabled",false);
 		hideMultiple([myBench.BOUCHE_DESSUS, myBench.BOUCHON_COTE]);
 		showMultiple([myBench.BOUCHON_DESSUS, myBench.BOUCHE_COTE]);		
-		if ($('#encleft_b').prop('checked')){		
-			_camera([-1.28, -1.42+widthOption, 0.58], [0.33, -0.11+widthOption, -0.02], 2);	
-		}else{
-			_camera([-1.52, 1.39-widthOption, 1], [0.36, 0.09-widthOption, 0.28], 2);			
-		}
+		_camera([-1.52, 1.39-widthOption, 1], [0.36, 0.09-widthOption, 0.28], 2);
 });
 
 $('#grey_b').change(function() {
@@ -462,11 +450,7 @@ $('#dr3_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;
 	if(this.checked){
 		showMultiple([myBench.DR3, myBench.DR3T]);
-		if ($('#encleft_b').prop('checked')){	
-			_camera([1.4, 1.51-widthOption, 0.365], [-0.34, 0.27-widthOption, -0.134], 2);
-		}else{
-			_camera([1.4, -1.59+widthOption, 0.84], [-0.08, -0.14+widthOption, 0.24], 2);
-		}		
+		_camera([1.4, -1.59+widthOption, 0.84], [-0.08, -0.14+widthOption, 0.24], 2);	
 	}else{
 		hideMultiple([myBench.DR3, myBench.DR3T]);
 	}
@@ -485,11 +469,7 @@ $('#slidews_b').change(function() {
 		}else{
 			$('#scr1_b').prop('checked', false);
 		}			
-		if ($('#encleft_b').prop('checked')){		
-			_camera([1.37, 1.299-widthOption, 0.593], [-0.011, 0.61-widthOption, 0.188], 2);
-		}else{
-			_camera([1.4, -1.59+widthOption, 0.84], [-0.08, -0.14+widthOption, 0.24], 2);
-		}
+		_camera([1.4, -1.59+widthOption, 0.84], [-0.08, -0.14+widthOption, 0.24], 2);
 	}else{
 		hideMultiple([myBench.SLIDEWS,myBench.SLIDINGWS]);
 	}
@@ -497,24 +477,16 @@ $('#slidews_b').change(function() {
 $('#pc1_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;
 	if(this.checked){
-		_show(myBench.PC1);
-		if ($('#encleft_b').prop('checked')){		
-			_camera([0.907, 1.65-widthOption, 0.462], [-0.624, 0.563-widthOption, -0.126], 2);	
-		}else{	
-			_camera([1.14, -1.66+widthOption, 0.86], [-0.39, -0.56+widthOption, 0.36], 2);	
-		}
+		_show(myBench.PC1);	
+		_camera([1.14, -1.66+widthOption, 0.86], [-0.39, -0.56+widthOption, 0.36], 2);	
 	}else{
 		_hide(myBench.PC1);	
 	}
 });	
 $('#arm1_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;
-	if(this.checked){
-		if ($('#encleft_b').prop('checked')){		
-			_camera([1.555, 1.53-widthOption, 0.868], [-0.182, 0.571-widthOption, 0.322], 2);
-		}else{		
-			_camera([1.58, -1.61+widthOption, 1.37], [-0.18, -0.52+widthOption, 0.81], 2);	
-		}
+	if(this.checked){	
+		_camera([1.58, -1.61+widthOption, 1.37], [-0.18, -0.52+widthOption, 0.81], 2);	
 		hideMultiple([myBench.SLIDEWS,myBench.SLIDINGWS,myBench.ARMERG]);
 		showMultiple([myBench.KEY1,myBench.KEY1_SLIDING,myBench.SCR1]);
 		$('#slidews_b').prop('checked', false);
@@ -534,11 +506,7 @@ $('#arm1_b').change(function() {
 $('#scr1_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;
 	if(this.checked){
-		if ($('#encleft_b').prop('checked')){		
-			_camera([1.41, 0.935-widthOption, 0.983], [-0.267, 0.813-widthOption, 0.44], 2);	
-		}else{	
-			_camera([1.58, -1.61+widthOption, 1.37], [-0.18, -0.52+widthOption, 0.81], 2);	
-		}
+		_camera([1.58, -1.61+widthOption, 1.37], [-0.18, -0.52+widthOption, 0.81], 2);	
 		_show(myBench.SCR1);
 		_hide(myBench.ARMERG);
 		$('#armerg_b').prop('checked', false);
@@ -556,11 +524,7 @@ $('#scr1_b').change(function() {
 $('#key1_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;
 	if(this.checked){
-		if ($('#encleft_b').prop('checked')){		
-			_camera([1.37, 1.299-widthOption, 0.593], [-0.011, 0.61-widthOption, 0.188], 2);
-		}else{
-			_camera([1.4, -1.59+widthOption, 0.84], [-0.08, -0.14+widthOption, 0.24], 2);
-		}
+		_camera([1.4, -1.59+widthOption, 0.84], [-0.08, -0.14+widthOption, 0.24], 2);
 		showMultiple([myBench.KEY1,myBench.KEY1_SLIDING]);	
 		hideMultiple([myBench.SLIDEWS,myBench.SLIDINGWS,myBench.ARMERG,myBench.SCR1]);
 		$('#armerg_b').prop('checked', false);
@@ -578,12 +542,8 @@ $('#key1_b').change(function() {
 });	
 $('#armerg_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;
-	if(this.checked){
-		if ($('#encleft_b').prop('checked')){		
-			_camera([1.41, 0.935-widthOption, 0.983], [-0.267, 0.813-widthOption, 0.44], 2);	
-		}else{			
-			_camera([1.58, -1.61+widthOption, 1.37], [-0.18, -0.52+widthOption, 0.81], 2);	
-		}
+	if(this.checked){		
+		_camera([1.58, -1.61+widthOption, 1.37], [-0.18, -0.52+widthOption, 0.81], 2);	
 		showMultiple([myBench.ARMERG,myBench.SCR1]);
 		hideMultiple([myBench.KEY1,myBench.KEY1_SLIDING]);
 		$('#scr1_b').prop('checked', false);
@@ -595,12 +555,8 @@ $('#armerg_b').change(function() {
 });	
 $('#cabletray_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;
-	if(this.checked){
-		if ($('#encleft_b').prop('checked')){		
-			_camera([-1.392, -0.998+widthOption, 0.273], [-0.07, -0.324+widthOption, -0.159], 2);	
-		}else{		
-			_camera([-1.69, 1.38-widthOption, 0.69], [-0.121, 0-widthOption, 0.21], 2);
-		}
+	if(this.checked){		
+		_camera([-1.69, 1.38-widthOption, 0.69], [-0.121, 0-widthOption, 0.21], 2);
 		if (currentFondWidth < 160)
 			showMultiple([myBench.CABLETRAY_L,myBench.CABLETRAY_C]);
 		else
@@ -617,11 +573,7 @@ $('#mnfld_b').change(function(err) {
 	if(this.checked){		
 		_camera([1.76, 0, 0.98], [-0.15, 0.04, 0.2], 2);
 		_show(myBench.SOLV_MNFLD);
-		if ($('#encleft_b').prop('checked')) {
-			_scale([myBench.SOLV_MNFLD], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, widthOption, 0, 1]);	
-		}else{
-			_scale([myBench.SOLV_MNFLD], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -widthOption, 0, 1]);
-		}
+		_scale([myBench.SOLV_MNFLD], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -widthOption, 0, 1]);
 	}else{
 		_hide(myBench.SOLV_MNFLD);	
 	}
@@ -634,11 +586,7 @@ $('#solv_b').change(function(err) {
 		$('#can10l_b').prop('checked', false);
 		$('#can10l_id').show();	
 		_camera([1.76, 0, 0.98], [-0.15, 0.04, 0.2], 2);
-		if ($('#encleft_b').prop('checked')) {
-			_scale([myBench.CAN10L, myBench.EXHFIL, myBench.SOLV, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0, -thisStruct.solv+0.019, 0, 1]);	
-		}else{
-			_scale([myBench.CAN10L, myBench.EXHFIL, myBench.SOLV, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, thisStruct.solv, 0.02, 1]);
-		}
+		_scale([myBench.CAN10L, myBench.EXHFIL, myBench.SOLV, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, thisStruct.solv, 0.02, 1]);
 		hideMultiple([myBench.LATSOLV,myBench.CAN10L,myBench.EXHFIL,myBench.ELEC2LEVEL,myBench.ELEC1LEVEL]);		
 		$('#latsolv_b').prop('checked', false);
 		$('#latcan10l_b').prop('checked', false);
@@ -698,13 +646,8 @@ $('#latsolv_b').change(function() {
 		let widthOption = (160-currentFondWidth)/200;
 		_show(myBench.LATSOLV);
 		hideMultiple([myBench.SOLV,myBench.CAN10L,myBench.EXHFIL, myBench.ELEC1LEVEL, myBench.ELEC2LEVEL]);	
-		if ($('#encleft_b').prop('checked')) {
-			_camera([1.24, -1.58+widthOption, 0.39], [-0.489, -0.1+widthOption, -0.4], 2);
-			_scale([myBench.CAN10L, myBench.EXHFIL, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.02, widthOption-0.89, 0.148, 1]);	
-		}else{
-			_camera([1.15, 1.59-widthOption, 0.72], [-0.433, 0.431-widthOption, 0.07], 2);
-			_scale([myBench.CAN10L, myBench.EXHFIL, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0.02, -widthOption+0.89, 0.148, 1]);
-		}
+		_camera([1.15, 1.59-widthOption, 0.72], [-0.433, 0.431-widthOption, 0.07], 2);
+		_scale([myBench.CAN10L, myBench.EXHFIL, myBench.ELEC2LEVEL], [1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0.02, -widthOption+0.89, 0.148, 1]);
 		$('#solv_b').prop('checked', false);
 		$('#can10l_b').prop('checked', false);
 		$('#can10l_id').hide();
@@ -735,11 +678,7 @@ $('#latcan10l_b').change(function() {
 		$('#latexhfil_id').show();
 		$('#lateleclevel_b').prop('checked', false);
 		$('#lateleclevel_id').show();
-		if ($('#encleft_b').prop('checked')) {
-			_camera([1.24, -1.58+widthOption, 0.39], [-0.489, -0.1+widthOption, -0.4], 2);
-		}else{
-			_camera([1.15, 1.59-widthOption, 0.72], [-0.433, 0.431-widthOption, 0.07], 2);
-		}
+		_camera([1.15, 1.59-widthOption, 0.72], [-0.433, 0.431-widthOption, 0.07], 2);
 	}else{
 		_hide(myBench.CAN10L);
 		_hide(myBench.EXHFIL);  
@@ -753,11 +692,7 @@ $('#latexhfil_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;
 	if(this.checked){
 		_show(myBench.EXHFIL);
-		if ($('#encleft_b').prop('checked')) {
-			_camera([1.24, -1.58+widthOption, 0.39], [-0.489, -0.1+widthOption, -0.4], 2);
-		}else{
-			_camera([1.15, 1.59-widthOption, 0.72], [-0.433, 0.431-widthOption, 0.07], 2);
-		}
+		_camera([1.15, 1.59-widthOption, 0.72], [-0.433, 0.431-widthOption, 0.07], 2);
 	}else{
 		_hide(myBench.EXHFIL);
 	}
@@ -766,15 +701,9 @@ $('#lateleclevel_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;
 	if(this.checked){
 		_show(myBench.ELEC2LEVEL);
-		// showMultiple([myBench.ELEC1LEVEL,myBench.ELEC2LEVEL]);
-		if ($('#encleft_b').prop('checked')) {
-			_camera([1.24, -1.58+widthOption, 0.39], [-0.489, -0.1+widthOption, -0.4], 2);
-		}else{
-			_camera([1.15, 1.59-widthOption, 0.72], [-0.433, 0.431-widthOption, 0.07], 2);
-		}
+		_camera([1.15, 1.59-widthOption, 0.72], [-0.433, 0.431-widthOption, 0.07], 2);
 	}else{
 		_hide(myBench.ELEC2LEVEL);
-		// hideMultiple([myBench.ELEC1LEVEL,myBench.ELEC2LEVEL]);
 	}
 });
 
@@ -787,16 +716,10 @@ $('#hrm_b').change(function() {
 	let thisStruct = allStruct[currentThisStruct];
 	if(this.checked){
 		showMultiple([myBench.HRM_NE27, myBench.BOUCHE_DESSUS, myBench.BOUCHON_COTE]);	
-		$('#bouchSide_b').prop("disabled",false);
-		if ($('#encleft_b').prop('checked')){
-			_camera([-1.28, -1.42+widthOption, 0.58], [0.33, -0.11+widthOption, -0.02], 2);	
-			_scale([myBench.HRM_NE27], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.035, 0.076+widthOption-thisStruct.hrm, 0, 1]);
-			_scale([myBench.BOUCHON_DESSUS, myBench.BOUCHON_COTE,myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.035, -0.094+widthOption-thisStruct.hrm, 0, 1]);
-		}else{		
-			_camera([-1.52, 1.39-widthOption, 1], [0.36, 0.09-widthOption, 0.28], 2);			
-			_scale([myBench.HRM_NE27], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.035, -0.076-widthOption+thisStruct.hrm, 0, 1]);
-			_scale([myBench.BOUCHON_DESSUS, myBench.BOUCHON_COTE,myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.035, 0.094-widthOption+thisStruct.hrm, 0, 1]);
-		}
+		$('#bouchSide_b').prop("disabled",false);	
+		_camera([-1.52, 1.39-widthOption, 1], [0.36, 0.09-widthOption, 0.28], 2);			
+		_scale([myBench.HRM_NE27], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.035, -0.076-widthOption+thisStruct.hrm, 0, 1]);
+		_scale([myBench.BOUCHON_DESSUS, myBench.BOUCHON_COTE,myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, -0.035, 0.094-widthOption+thisStruct.hrm, 0, 1]);
 	}else{
 		hideMultiple([myBench.HRM_NE27, myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE, myBench.BOUCHON_COTE, myBench.BOUCHON_DESSUS]);
 		$('#bouchSide_b').prop("disabled",true);
@@ -829,21 +752,15 @@ $('#slidingAll_b').change(function() {
 	let widthOption = (160-currentFondWidth)/200;		
 	$(this).prop('disabled', true); //Désactivation du bouton pendant l'animation
 	if(this.checked){
-		if ($('#encleft_b').prop('checked')){
-			_translate([myBench.SLIDINGWS], [0.5+0.0346, 0.94-widthOption, 0],{duration: 2.0});
-			_translate([myBench.KEY1_SLIDING], [0.26+0.0346, 0.94-widthOption, 0],{duration: 2.0}, enableOptionAfterAnimate);
-			_translate([myBench.DR3T ], [0.35+0.0346, 0.94-widthOption, 0],{duration: 2.0}, enableOptionAfterAnimate);
-		}else{
-			_translate([myBench.SLIDINGWS], [0.5+0.0346, widthOption, 0],{duration: 2.0});
-			_translate([myBench.KEY1_SLIDING], [0.26+0.0346, widthOption, 0],{duration: 2.0}, enableOptionAfterAnimate);			
-			_translate([myBench.DR3T], [0.35+0.0346, widthOption, 0],{duration: 2.0}, enableOptionAfterAnimate);			
-		}
+		_translate([myBench.SLIDINGWS], [0.5+0.0346, 0.01+widthOption, 0],{duration: 2.0});
+		_translate([myBench.KEY1_SLIDING], [0.26+0.0346, 0.01+widthOption, 0],{duration: 2.0}, enableOptionAfterAnimate);			
+		_translate([myBench.DR3T], [0.35+0.0346, 0.01+widthOption, 0],{duration: 2.0}, enableOptionAfterAnimate);			
 		$("#opendoor_b").prop('disabled', true);
 		$('#opendoor_b').prop('checked', true);
 		_rotate([myBench.PORTE_TQXS, myBench.PORTE_TQXSS], [Math.PI/2,0, 0, 1], {duration: 1.0});
 	}else{
-		_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING], [0.0346, widthOption, 0],{duration: 1.0});
-		_translate([myBench.DR3T ], [0.0346, widthOption, 0],{duration: 1.0});
+		_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING], [0.0346, 0.01+widthOption, 0],{duration: 1.0});
+		_translate([myBench.DR3T ], [0.0346, 0.01+widthOption, 0],{duration: 1.0});
         $("#opendoor_b").prop('disabled', false);
 		$('#opendoor_b').prop('checked', false);	
 		_rotate([myBench.PORTE_TQXS, myBench.PORTE_TQXSS], [Math.PI/2,0, 0, 0], {duration: 2.0}, enableOptionAfterAnimate);
@@ -864,13 +781,8 @@ $('#save_b').click(function() {//Sauvegarde des données par email
 	$('#modal1').empty(); //vide la liste
 	myConfigResult={'nameOption':[], 'desOption':[],'Contact':{}};
 	let widthOption = (160-currentFondWidth)/200;
-	if ($('#encleft_b').prop('checked')){//Remet toutes les positions à 0 en fonction ENCLEFT ou non
-		_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING, myBench.DR3T], [00, 0.94-widthOption, 0],{duration: 0.1});
-		_translate([myBench.DRY_PUMP], [0, -widthOption, 0]);
-	}else{
-		_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING], [0, widthOption, 0],{duration: 0.1});
-		_translate([myBench.DR3T ], [0.0346, widthOption, 0],{duration: 1.0});
-	}		
+	_translate([myBench.SLIDINGWS, myBench.KEY1_SLIDING], [0, 0.01+widthOption, 0],{duration: 0.1});
+	_translate([myBench.DR3T ], [0.0346, 0.01+widthOption, 0],{duration: 1.0});	
 	_rotate([myBench.PORTE_TQXS, myBench.PORTE_TQXSS], [Math.PI/2,0, 0, 0], {duration: 0.1});
 	_camera([2.9199309882183164, -2.407788787526358, 1.299959525793121], [-0.11434650792771223, -0.054608228752221794, 0.346318336704698], 0.1, function(err){
 		$('#save_b').prop("disabled",true);
