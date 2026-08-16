@@ -202,7 +202,7 @@ configurator.init( uid, {//Lance la 3D depuis Sketchfab
 				_scale([myBench.LATSOLV], [-1, 0, 0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 0.33, -0.07, 0, 1]);
 				_scale([myBench.PORTE_ICP], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.4723, -0.833, 0, 1]);
 				_scale([myBench.PORTE_NE39], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.4723, 0.215, 0, 1]);
-				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -0.1, 0]);//Positionne les pompes à vide
+				_translate([myBench.POMPE_D, myBench.ODP, myBench.ODK], [0, -0.58, 0.021]);//Positionne les pompes à vide
 				_scale([myBench.KEY1, myBench.KEY1_SLIDING, myBench.SLIDEWS, myBench.SLIDINGWS], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.06, 0.9983, 0, 1]);
 				_scale([myBench.DR3, myBench.DR3T], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0.055, 0.9983, 0, 1]);
 				_scale([myBench.SOLV_MNFLD], [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, -0.86, 0, 1]);
