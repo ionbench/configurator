@@ -1267,7 +1267,7 @@ function genererPDF(){
 		"message":myConfigResult.Contact.Message,
 		"system":myConfigResult.Contact.Instrument,
 		"vacuumpump":myConfigResult.Contact.VacuumPump,
-		"subject":"ICP-OES Bench Configuration "+idTime,
+		"subject":"LC Bench Configuration "+idTime,
 		"options":htmlBody,
 		"photo":resultImg
     };
