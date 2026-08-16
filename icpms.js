@@ -603,7 +603,7 @@ $('#hrm_b').change(function() {
 		_translate([myBench.BOUCHE_COTE], [-1.258, -0.475, 0.182]);
 		_translate([myBench.BOUCHON_DESSUS], [-1.424, -0.475, 0.184]);
 	}else{
-		hideMultiple([myBench.HRM_ICP, myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE, myBench.BOUCHON_COTE, myBench.BOUCHON_DESSUS]);
+		hideMultiple([myBench.HRM_ICP, myBench.HRM_NE39, myBench.BOUCHE_DESSUS, myBench.BOUCHE_COTE, myBench.BOUCHON_COTE, myBench.BOUCHON_DESSUS]);
 		$('#bouchSide_b').prop("disabled",true);
 		$('#bouchUp_b').prop("disabled",true);
 	}
