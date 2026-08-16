@@ -629,7 +629,7 @@ $('#vpsp_b').change(function() {
 
 $('#odk_b').change(function() {
 	if(this.checked){		
-		_show(myBench.POMPE_D);	
+		showMultiple([myBench.CHILLER,myBench.POMPE_D]);
 		_camera([1.91, -0.26, 0.687], [0.12, -0.043, 0.364], 2)	
 		_show(myBench.ODK);
 		$('#pump_b').prop('checked', true);
@@ -644,7 +644,7 @@ $('#odk_b').change(function() {
 
 $('#odp_b').change(function() {
 	if(this.checked){
-		_show(myBench.POMPE_D);	
+		showMultiple([myBench.CHILLER,myBench.POMPE_D]);
 		_camera([1.91, -0.26, 0.687], [0.12, -0.043, 0.364], 2)	
 		showMultiple([myBench.ODP, myBench.ODK]);
 		$('#odk_b').prop('checked', true);
