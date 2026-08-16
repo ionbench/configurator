@@ -497,7 +497,7 @@ $('#cabletray_b').change(function() {
 });	
 $('#mnfld_b').change(function(err) {
 	if(this.checked){		
-		_camera([1.76, 0, 0.98], [-0.15, 0.04, 0.2], 2);
+		_camera([1.727, -0.93, 1.044], [-0.199, -0.89, 0.264], 2);
 		_show(myBench.SOLV_MNFLD);
 	}else{
 		_hide(myBench.SOLV_MNFLD);	
