@@ -224,7 +224,7 @@ configurator.init( uid, {//Lance la 3D depuis Sketchfab
 			$('#allIn').hide();
 			$('#dimCm_WS_id').val(dimWS[currentWidth].Cm);
 			$('#dimIn_WS_id').hide();	
-			$('#Model_BCH_id').val('BCH'+currentWidth+"97-ICP-MS");
+			$('#Model_BCH_id').val('BCH'+currentWidth+"NE39-ICP-MS");
 			$('#loadingScren').hide();//Forcer le hide de plusieurs case a cocher
 			api.getMaterialList(function (err, materials) {
 				myMaterials = materials;
@@ -308,7 +308,7 @@ function dimChange(myWidth){//Modifie les propriété du Bench en fonction de la
     $("#opendoor_b").prop('disabled', false);
 	$('#bouchSide_b').prop("disabled",true);
 	$('#bouchUp_b').prop("disabled",true);
-	$('#Model_BCH_id').val('BCH'+myWidth+"97-ICP-MS");
+	$('#Model_BCH_id').val('BCH'+myWidth+"NE39-ICP-MS");
 	currentWidth = myWidth;
 	currentFondWidth = fondWidth;	
 	currentThisStruct = style[myWidth][0];
@@ -791,7 +791,7 @@ $('#save_b').click(function() { // Sauvegarde des données par email
                         resultImg = compressedResult;
                         $('#modalImg').attr('src', resultImg);
                         $('#modal1').empty();	
-                        $('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>BCH" + $('#dim_val').val() + "97-ICP-MS" + "</label>");
+                        $('#modal1').append("<label class='optionsTitrResume'>Bench reference</label> <label class='optionsResume'>BCH" + $('#dim_val').val() + "NE39-ICP-MS" + "</label>");
                         
                         $('input:checked').each(function () {	
                             if (this.id == 'opendoor_b' || this.id == 'pump_b' || this.id == 'slidingAll_b' || this.id == 'togBtn')
