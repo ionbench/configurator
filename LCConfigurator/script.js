@@ -560,7 +560,11 @@ function changeColor(color){
 
 function sizeChange(mySize){
 	//Hide all
-	$.each(myBench, function(i, e) {_hide(e)});
+	$.each(myBench, function(name, id) {
+				if (name !== 'root' && name !== 'GLTF_SceneRootNode') {
+                _hide(id);
+				}
+            });
 	
 	let valPos = $('#slidingAll_b').prop('checked') ? 0.26 : 0;
 	//Afficher les checkbox options necessaire
