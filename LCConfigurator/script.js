@@ -492,6 +492,7 @@ configurator.init( uid, {
             $('#uh1in').hide();
             $('#uh3in').hide();
             $('#uh4in').hide();
+			$('#slidingAll_b').prop('disabled', true);
             $('#can10l_id').hide();
             $('#exhfil_id').hide();
             $('#eleclevel_id').hide();
