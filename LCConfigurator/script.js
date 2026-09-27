@@ -28,6 +28,8 @@
 ****************************************************************************************************************************************************************************/
 
 var _api;
+var myBench = {};
+var myBench_geo = {};
 var myMaterials;
 var currentSize = "90x75";
 var currentPosition = 0;
@@ -38,7 +40,7 @@ var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 const iframe = document.getElementById('api-frame');
 const configurator = new Sketchfab(iframe);
 const uid = 'df9cbd13f18548b78029f6457dc1a367'; //Lien id du Sketchfab
-const myBench = {};
+//const myBench = {};
 
 const sizeConfig = {
 	"45x55":{
@@ -284,7 +286,56 @@ const myColor = {
 }
 const textureListBench = ["TRESPA","PA_RAL_9005"]
 
-//Fontions
+
+//Fonctions
+
+// On stocke la carte des enfants pour chaque nœud
+var nodeChildrenMap = {};
+
+function _showBranch(nodeId) {
+    if (nodeId === undefined || nodeId === null) return;
+    _show(nodeId);
+    
+    // Si ce nœud a des enfants, on les affiche tous de manière descendante
+    if (nodeChildrenMap[nodeId]) {
+        $.each(nodeChildrenMap[nodeId], function(i, childId) {
+            _showBranch(childId);
+        });
+    }
+}
+
+function _hideBranch(nodeId) {
+    if (nodeId === undefined || nodeId === null) return;
+    _hide(nodeId);
+    
+    // Si ce nœud a des enfants, on les masque tous de manière descendante
+    if (nodeChildrenMap[nodeId]) {
+        $.each(nodeChildrenMap[nodeId], function(i, childId) {
+            _hideBranch(childId);
+        });
+    }
+}
+
+function showMultiple(objArray) {
+    $.each(objArray, function(i, item) {
+        // item peut être un ID (myBench.ALIM) ou une chaîne ('ALIM')
+        var id = (typeof item === 'number') ? item : myBench[item];
+        if (id !== undefined) {
+            _showBranch(id);
+        }
+    });
+}
+
+function hideMultiple(objArray) {
+    $.each(objArray, function(i, item) {
+        var id = (typeof item === 'number') ? item : myBench[item];
+        if (id !== undefined) {
+            _hideBranch(id);
+        }
+    });
+}
+
+
 
 function _hide(e) {
 	_api.hide(e, function(err) {
@@ -308,41 +359,48 @@ function _show(e) {
 	})
 }
 
-function _translate(obj, tab, option={}, myFunc) {
-	$.each(obj, function(i, e){		
-		_api.translate(e, tab, option, function(err){
-			if (err != null)
-				console.log("Erreur lors du translate : " + e + "\n" + err);
-			if(myFunc) myFunc();
-		})
-	});
+function _translate(nodes, coords) {
+    // Si la fonction reçoit un tableau de coordonnées [x, y, z]
+    if (coords && coords.length === 3) {
+        var x = coords[0];
+        var y = coords[1];
+        var z = coords[2];
+
+        // Conversion automatique : Ancien [X, Y, Z] -> Nouveau [X, Z, -Y]
+        // (D'après ton exemple : [0.37, -0.272, 0] devient [0.37, 0, 0.272])
+        coords = [x, z, -y];
+    }
+
+    // Le reste du code d'origine de ta fonction _translate
+    // (boucle sur les nœuds et appel api.translate)
+    var targetNodes = Array.isArray(nodes) ? nodes : [nodes];
+    $.each(targetNodes, function(i, id) {
+        if (id !== undefined) {
+            _api.translate(id, coords, { duration: 0 }); // adapt selon tes options d'origine
+        }
+    });
 }
 
-function _rotate(obj, tab, option={}, myFunc) {
-	$.each(obj, function(i, e){		
-		_api.rotate(e, tab, option, function(err){
-			if (err != null)
-				console.log("Erreur lors du rotate : " + e + "\n" + err);
-			if(myFunc) myFunc();
-		})
-	});
-}
+function _rotate(nodes, rotationData) {
+    // Si rotationData contient [angle, x, y, z]
+    if (rotationData && rotationData.length === 4) {
+        var angle = rotationData[0];
+        var x = rotationData[1];
+        var y = rotationData[2];
+        var z = rotationData[3];
 
-function showMultiple(obj){
-	$.each(obj, function (i, e) { 
-	if (isNaN(parseInt(e)))
-		_show(myBench[e]);
-	else
-		_show(e)
-	});
-}
-function hideMultiple(obj){
-	$.each(obj, function (i, e) { 
-	if (isNaN(parseInt(e)))
-		_hide(myBench[e]);
-	else
-		_hide(e)
-	});
+        // Conversion automatique : Ancien [Angle, X, Y, Z] -> Nouveau [Angle, X, Z, -Y]
+        // Ex: [Math.PI/2, 0, 0, 1] devient automatiquement [Math.PI/2, 0, 1, 0]
+        rotationData = [angle, x, z, -y];
+    }
+
+    // Le reste de ton code _rotate d'origine...
+    var targetNodes = Array.isArray(nodes) ? nodes : [nodes];
+    $.each(targetNodes, function(i, id) {
+        if (id !== undefined) {
+            _api.rotate(id, rotationData, { duration: 0 }); // adapte selon tes options
+        }
+    });
 }
 
 configurator.init( uid, {
@@ -352,55 +410,94 @@ configurator.init( uid, {
 		api.addEventListener('viewerready', function() {
 			//API is ready to use
 			console.log( 'Viewer is ready' );
-			api.getNodeMap(function(err, nodes) {
-				if (!err) {					
-					$.each(nodes, function(i, e){						
-						if (
-						//Supprime nom undefined 
-						(!e.name) || 
-						//Supprime nom avec miniscule 2e lettre
-						e.name.charAt(1) == e.name.charAt(1).toLowerCase() ||
-						//Supprime nom avec _0 à _9 à la fin
-						e.name.match("_([0-9])$"))
-							return 						
-						//Création d'un tableau d'association nom <> ID
-						myBench[e.name]=i 
-						// console.log(e.name +' : '+ e.instanceID);
-						//Masquage de tous les élements au début
-						_hide(i);		
-					});
-				}		
-				showMultiple([myBench.ALIM, myBench.BCHPOS, myBench.PLATEAU_90x75, myBench.BCHLC_90x75, myBench.CO1UH3_1P, myBench.CO1UH3_2P,myBench.CO1UH3_22P, myBench.CO2UH3_1P, myBench.CO2UH3_2P]);
-				_translate([myBench.PC1, myBench.SCR1, myBench.ARMERG], [0, 0.249, 0]);
-				_rotate([myBench.ALIM], [Math.PI/2,0, 0, 1]); 
-				_translate([myBench.ALIM], [-0.1, -0.2, 0]);
-				_translate([myBench.BCHPOS], [0.37, -0.272, 0]);
-				_translate([myBench.REMOT], [0.415,0.33,0]);
-				_translate([myBench.KEY1, myBench.KEY1_SLIDING], [0, 0, 0]);
-				_translate([myBench.CO1UH3_1P, myBench.CO1UH3_2P,myBench.CO1UH3_22P, myBench.CO1UH4_1P, myBench.CO1UH4_2P,myBench.CO1UH4_22P, myBench.CO1UH1_1P, myBench.CO1UH1_2P, myBench.CO1UH1_3P], [0, -0.23, 0]);
-				_translate([myBench.CO2UH3_1P, myBench.CO2UH3_2P, myBench.CO2UH4_1P, myBench.CO2UH4_2P, myBench.CO2UH1_1P, myBench.CO2UH1_2P, myBench.CO2UH1_3P], [0, 0.23, 0]);
-				$('#moveLUH1_id').hide();
-				$('#moveLUH3_id').show();
-				$('#moveLUH4_id').hide();
-				$('#shelving_id').hide();
-				$('#scr1_id').hide();
-				$('#key1_id').hide();
-				$('#flex_id').hide();
-				$('#allIn').hide();
-				$('#allUH1In').hide();
-				$('#allUH3In').hide();
-				$('#allUH4In').hide();
-				$('#uh1in').hide();
-				$('#uh3in').hide();
-				$('#uh4in').hide();
-				$('#can10l_id').hide();
-				$('#exhfil_id').hide();
-				$('#eleclevel_id').hide();
-				$('#dimCm_WS_id').val(dimWS[currentSize].Cm);
-				$('#dimIn_WS_id').hide();	
-				$('#Model_BCH_id').val('BCHLC'+(dimWS[currentSize].size));
-				$('#loadingScren').hide();
-			});
+			api.getSceneGraph(function(err, result) {
+    if (!err && result) {
+        // Fonction récursive pour enregistrer les relations Parent -> Enfants
+        function buildGraphMap(node) {
+            if (node.children && node.children.length > 0) {
+                nodeChildrenMap[node.instanceID] = [];
+                $.each(node.children, function(i, child) {
+                    nodeChildrenMap[node.instanceID].push(child.instanceID);
+                    buildGraphMap(child);
+                });
+            }
+        }
+        buildGraphMap(result);
+    }
+
+    // Une fois l'arborescence construite, on fait le mapping getNodeMap classique
+    api.getNodeMap(function(err, nodes) {
+        if (!err) {
+            myBench = {};
+
+            $.each(nodes, function(i, e) {
+                if (!e.name) return;
+
+                var cleanName = e.name.replace(/_[0-9]+$/, '');
+
+                if (cleanName.length > 1 && cleanName.charAt(1) == cleanName.charAt(1).toLowerCase()) return;
+
+                // On ne conserve QUE les MatrixTransform dans myBench (obligatoire pour translate/rotate)
+                if (e.type === 'MatrixTransform') {
+                    myBench[cleanName] = parseInt(i, 10);
+                }
+            });
+
+            // 1. On masque TOUS les éléments enregistrés dans myBench (et toute leur descendance)
+            $.each(myBench, function(name, id) {
+				if (name !== 'root' && name !== 'GLTF_SceneRootNode') {
+                _hide(id);
+				}
+            });
+
+            // 2. On affiche uniquement la sélection initiale
+            showMultiple([
+                myBench.ALIM, 
+                myBench.BCHPOS, 
+                myBench.PLATEAU_90x75, 
+                myBench.BCHLC_90x75, 
+                myBench.CO1UH3_1P, 
+                myBench.CO1UH3_2P,
+                myBench.CO1UH3_22P, 
+                myBench.CO2UH3_1P, 
+                myBench.CO2UH3_2P
+            ]);
+
+            // Translations / Rotations
+            _translate([myBench.PC1, myBench.SCR1, myBench.ARMERG], [0, 0.249, 0]);
+            _rotate([myBench.ALIM], [Math.PI/2, 0, 0, 1]); 
+            _translate([myBench.ALIM], [-0.1, -0.2, 0]);
+            _translate([myBench.BCHPOS], [0.37, -0.272, 0]);
+            _translate([myBench.REMOT], [0.415, 0.33, 0]);
+            _translate([myBench.KEY1, myBench.KEY1_SLIDING], [0, 0, 0]);
+            _translate([myBench.CO1UH3_1P, myBench.CO1UH3_2P, myBench.CO1UH3_22P, myBench.CO1UH4_1P, myBench.CO1UH4_2P, myBench.CO1UH4_22P, myBench.CO1UH1_1P, myBench.CO1UH1_2P, myBench.CO1UH1_3P], [0, -0.23, 0]);
+            _translate([myBench.CO2UH3_1P, myBench.CO2UH3_2P, myBench.CO2UH4_1P, myBench.CO2UH4_2P, myBench.CO2UH1_1P, myBench.CO2UH1_2P, myBench.CO2UH1_3P], [0, 0.23, 0]);
+
+            // UI HTML
+            $('#moveLUH1_id').hide();
+            $('#moveLUH3_id').show();
+            $('#moveLUH4_id').hide();
+            $('#shelving_id').hide();
+            $('#scr1_id').hide();
+            $('#key1_id').hide();
+            $('#flex_id').hide();
+            $('#allIn').hide();
+            $('#allUH1In').hide();
+            $('#allUH3In').hide();
+            $('#allUH4In').hide();
+            $('#uh1in').hide();
+            $('#uh3in').hide();
+            $('#uh4in').hide();
+            $('#can10l_id').hide();
+            $('#exhfil_id').hide();
+            $('#eleclevel_id').hide();
+            $('#dimCm_WS_id').val(dimWS[currentSize].Cm);
+            $('#dimIn_WS_id').hide();   
+            $('#Model_BCH_id').val('BCHLC'+(dimWS[currentSize].size));
+            $('#loadingScren').hide();
+        }
+    });
+});
 			
 			api.getMaterialList(function (err, materials) {
 				myMaterials = materials;
