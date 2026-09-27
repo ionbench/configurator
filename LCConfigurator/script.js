@@ -786,19 +786,19 @@ $('#grey_b').change(function() {
 
 $('#pc1_b').change(function() {
 	if(this.checked){
-		_show(myBench.PC1);
+		showMultiple([myBench.PC1]);
 		_camera([0.83, -0.91+0.23+sizeConfig[currentSize].widthCol1, 0.5+(currentPosition/100)], [-0.17, -0.11+0.23+sizeConfig[currentSize].widthCol1, 0.18+(currentPosition/100)], 2);
 	}else{
-		_hide(myBench.PC1);	
+		hideMultiple([myBench.PC1]);	
 	}
 });	
 
 $('#remot_b').change(function() {
 	if(this.checked){
-		_show(myBench.REMOT);
+		showMultiple([myBench.REMOT]);
 		_camera([0.87, 0.574-0.33+sizeConfig[currentSize].widthREMOT, 0.6+(currentPosition/100)], [-0.011, 0.067-0.33+sizeConfig[currentSize].widthREMOT, 0.35+(currentPosition/100)], 2);
 	}else{
-	_hide(myBench.REMOT);
+	hideMultiple([myBench.REMOT]);
 	}	
 });	
 $('#arm1_b').change(function() {
@@ -810,7 +810,7 @@ $('#arm1_b').change(function() {
 		_translate([myBench.CO2UH1_1P,myBench.CO2UH3_1P,myBench.CO2UH4_1P], [-0.12, sizeConfig[currentSize].widthCol2, 0]);
 		_translate([myBench.CO3UH1_1P,myBench.CO3UH3_1P,myBench.CO3UH4_1P], [-0.12, sizeConfig[currentSize].widthCol3, 0]);
 		showMultiple([myBench.KEY1,myBench.KEY1_SLIDING,myBench.SCR1]);
-		_hide(myBench.ARMERG);
+		hideMultiple([myBench.ARMERG]);
 		$('#armerg_b').prop('checked', false);
 		$('#scr1_b').prop('checked', false);
 		$('#key1_b').prop('checked', false);
@@ -880,9 +880,9 @@ $('#arm1_b').change(function() {
 });
 $('#scr1_b').change(function() {
 	if(this.checked){
-		_camera([1.24, -1.54+sizeConfig[currentSize].widthOption, 1.13+(currentPosition/100)], [-0.3, -0.30+sizeConfig[currentSize].widthOption, 0.68+(currentPosition/100)], 2);
-		_show(myBench.SCR1);
-		_hide(myBench.ARMERG);
+		_camera([1.04, -0.92-0.249+sizeConfig[currentSize].widthOption, 1.12+(currentPosition/100)], [-0.11, -0.002-0.249+sizeConfig[currentSize].widthOption, 0.68+(currentPosition/100)], 2);
+		showMultiple([myBench.SCR1]);
+		hideMultiple([myBench.ARMERG]);
 		$('#armerg_b').prop('checked', false);
 		if ($('#key1_b').prop('checked')){
 			$('#scr1_b').prop('checked', false);			
@@ -892,14 +892,14 @@ $('#scr1_b').change(function() {
 			$('#key1_id').hide();		
 		}
 	}else{
-		_hide(myBench.SCR1);	
+		hideMultiple([myBenchmyBench.SCR1]);	
 	}
 });	
 $('#key1_b').change(function() {
 	if(this.checked){
 		_camera([1.07, -0.82-0.249+sizeConfig[currentSize].widthOption, 1.1+(currentPosition/100)], [-0.005, -0.075-0.249+sizeConfig[currentSize].widthOption, 0.56+(currentPosition/100)], 2);
 		showMultiple([myBench.KEY1,myBench.KEY1_SLIDING]);	
-		hideMultiple([myBench.ARMERG,myBench.SCR1]);
+		hideMultiple([myBench.ARMERG]);
 		$('#armerg_b').prop('checked', false);
 		if ($('#scr1_b').prop('checked')){
 			$('#scr1_b').prop('checked', false);			
@@ -914,7 +914,7 @@ $('#key1_b').change(function() {
 });	
 $('#armerg_b').change(function() {
 	if(this.checked){
-		_camera([1.24, -1.54+sizeConfig[currentSize].widthOption, 1.13+(currentPosition/100)], [-0.3, -0.30+sizeConfig[currentSize].widthOption, 0.68+(currentPosition/100)], 2);
+		_camera([1.04, -0.92-0.249+sizeConfig[currentSize].widthOption, 1.12+(currentPosition/100)], [-0.11, -0.002-0.249+sizeConfig[currentSize].widthOption, 0.68+(currentPosition/100)], 2);
 		$('#slidingAll_b').prop('checked', false);
 		$('#slidingAll_b').prop('disabled', true);
 		showMultiple([myBench.ARMERG,myBench.SCR1]);
@@ -950,10 +950,10 @@ $('#armerg_b').change(function() {
 });	
 $('#iec_b').change(function() {
 	if(this.checked){
-		_show(myBench.IEC);
+		showMultiple([myBench.IEC]);
 		_camera([-0.46+sizeConfig[currentSize].depthOption, -0.37, 0.16+(currentPosition/100)], [-0.13+sizeConfig[currentSize].depthOption, 0.016, 0.59+(currentPosition/100)], 2);
 	}else{
-		_hide(myBench.IEC);	
+		hideMultiple([myBench.IEC]);	
 	}
 });	
 $('#uh1_b').change(function() {
@@ -978,7 +978,7 @@ $('#uh1_b').change(function() {
 		$('#moveLUH3_id').hide();
 		$('#moveLUH4_id').hide();
 		if (currentSize == "90x75" || currentSize == "45x55" || currentSize == "100x75" || currentSize == "120x75" || currentSize == "140x75" || currentSize == "150x75"){
-			_hide(myBench.PC1);
+			hideMultiple([myBench.PC1]);
 			$('#pc1_id').hide();	
 			$('#pc1_b').prop('checked', false);	
 			hideMultiple([myBench.SOLV, myBench.CAN10L, myBench.EXHFIL, myBench.ELEC2LEVEL, myBench.ELEC1LEVEL]);
@@ -1111,17 +1111,17 @@ $('#uh4_b').change(function() {
 
 $('#shelving_b').change(function() {
 	if(this.checked){
-		_show(myBench.SHELVING);
+		showMultiple([myBench.SHELVING]);
 		hideMultiple([myBench.CO1UH3_22P,myBench.CO1UH4_22P, myBench.ARMERG]);
 		$('#armerg_b').prop('checked', false);		
 		$('#uh1_b').prop('disabled', true);
 		_camera([2.3445210674638712, -1.4455336969835706, 1.59449030841362], [-0.19476365009814178, 0.40387029518456297, 0.8756128760104882], 2);
 	}else{
-		_hide(myBench.SHELVING);
+		hideMultiple([myBench.SHELVING]);
 		if ($('#uh3_b').prop('checked')){
-		_show(myBench.CO1UH3_22P);
+		showMultiple([myBench.CO1UH3_22P]);
 		}else if ($('#uh4_b').prop('checked')){
-		_show(myBench.CO1UH4_22P);
+		showMultiple([myBench.CO1UH4_22P]);
 		}	
 		$('#uh1_b').prop('disabled', false);
 	}
@@ -1131,7 +1131,7 @@ $('#shelving_b').change(function() {
 $('#solv_b').change(function() {
 	if(this.checked){
 		_camera([0.44, 0.93, 0.44], [0.12, 0.046, 0.14], 2);
-		_show(myBench.SOLV);
+		showMultiple([myBench.SOLV]);
 		$('#can10l_b').prop('checked', false);
 		$('#can10l_id').show();
 		if ($('#uh1_b').prop('checked')){
@@ -1163,7 +1163,7 @@ $('#solv_b').change(function() {
 $('#can10l_b').change(function() {
 	if(this.checked){
 		_camera([0.44, 0.93, 0.44], [0.12, 0.046, 0.14], 2);
-		_show(myBench.CAN10L);
+		showMultiple([myBench.CAN10L]);
 		$('#exhfil_b').prop('checked', false);
 		$('#exhfil_id').show();
 		$('#eleclevel_b').prop('checked', false);
@@ -1179,9 +1179,9 @@ $('#can10l_b').change(function() {
 $('#exhfil_b').change(function() {
 	if(this.checked){
 		_camera([0.44, 0.93, 0.44], [0.12, 0.046, 0.14], 2);
-		_show(myBench.EXHFIL);
+		showMultiple([myBench.EXHFIL]);
 	}else{
-		_hide(myBench.EXHFIL);
+		hideMultiple([myBench.EXHFIL]);
 	}
 });
 $('#eleclevel_b').change(function() {
@@ -1205,23 +1205,7 @@ $('#slidingAll_b').change(function() {
 	_translate([myBench.BCHPOS], [(sizeConfig[currentSize].depthPOS)+valPos, sizeConfig[currentSize].widthPOS+0, sizeConfig[currentSize].heightPOS+(currentPosition/100)],{duration: 1.0});
 	}
 });
-function compressBase64(base64Data, maxWidth, quality, callback) {
-    let img = new Image();
-    img.onload = function() {
-        let canvas = document.createElement('canvas');
-        let scale = maxWidth / img.width;
-        canvas.width = maxWidth;
-        canvas.height = img.height * scale;
-        
-        let ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        
-        // Exporte en JPEG compressé (ex: quality = 0.6)
-        let compressedBase64 = canvas.toDataURL('image/jpeg', quality);
-        callback(compressedBase64);
-    };
-    img.src = base64Data;
-}
+
 //SAVE
 $('#save_b').click(function() {	
 	$('#modal1').empty(); //vide la liste
