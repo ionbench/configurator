@@ -359,24 +359,28 @@ function _show(e) {
 	})
 }
 
-function _translate(nodes, coords) {
-    // Si la fonction reçoit un tableau de coordonnées [x, y, z]
+function _translate(nodes, coords, option = {}, myFunc) {
+    // 1. Conversion automatique des axes : Ancien [X, Y, Z] -> Nouveau [X, Z, -Y]
     if (coords && coords.length === 3) {
         var x = coords[0];
         var y = coords[1];
         var z = coords[2];
 
-        // Conversion automatique : Ancien [X, Y, Z] -> Nouveau [X, Z, -Y]
-        // (D'après ton exemple : [0.37, -0.272, 0] devient [0.37, 0, 0.272])
         coords = [x, z, -y];
     }
 
-    // Le reste du code d'origine de ta fonction _translate
-    // (boucle sur les nœuds et appel api.translate)
+    // 2. Normalisation en tableau au cas où 'nodes' soit un ID unique ou un tableau
     var targetNodes = Array.isArray(nodes) ? nodes : [nodes];
+
+    // 3. Exécution avec gestion des options (durée) et du callback
     $.each(targetNodes, function(i, id) {
         if (id !== undefined) {
-            _api.translate(id, coords, { duration: 0 }); // adapt selon tes options d'origine
+            _api.translate(id, coords, option, function(err) {
+                if (err != null) {
+                    console.log("Erreur lors du translate : " + id + "\n" + err);
+                }
+                if (myFunc) myFunc();
+            });
         }
     });
 }
